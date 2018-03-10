@@ -42,12 +42,12 @@ static NSString *const segueIdentifier = @"AddViewControllerSegue";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dishModel.dishCount;
+    return self.viewModel.storeCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WTETableViewCell *cell = [[WTETableViewCell alloc] init];
-    cell.dishItemModel = self.dishModel.dishModelItemArray[indexPath.row];
+    cell.storeItemModel = self.viewModel.storeItemModels[indexPath.row];
     [cell setup];
     return cell;
 }
@@ -61,7 +61,7 @@ static NSString *const segueIdentifier = @"AddViewControllerSegue";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqual:segueIdentifier]) {
         WTEAddViewController *vc = segue.destinationViewController;
-        vc.menuId = self.dishModel.menuId;
+        vc.menuId = self.viewModel.menuId;
     }
 }
 

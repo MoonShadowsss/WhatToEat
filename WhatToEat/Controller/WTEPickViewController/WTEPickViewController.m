@@ -18,9 +18,8 @@ static NSString *const cellIdentifier = @"cellId";
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) WTEMenuModel *menuModel;
-@property (strong, nonatomic) NSMutableArray<WTEDishModel *> *dishModelArray;
+@property (strong, nonatomic) NSMutableArray<StoresViewModel *> *storesViewModels;
 @property (strong, nonatomic) MenusViewModel *menusViewModel;
-@property (strong, nonatomic) StoresViewModel *storesViewModel;
 
 @end
 
@@ -60,9 +59,26 @@ static NSString *const cellIdentifier = @"cellId";
     @weakify(self);
     [[RACObserve(self.menusViewModel, menuItemModels) skip:1] subscribeNext:^(id x) {
         @strongify(self);
-        _dishModelArray = [NSMutableArray array];
-        [self fetchDishData];
-        
+        _storesViewModels = [NSMutableArray array];
+        for (MenuItemModel *item in self.menusViewModel.menuItemModels) {
+            StoresViewModel *storesViewModel = [[StoresViewModel alloc] init];
+            storesViewModel.menuId = item.menuId;
+            [[storesViewModel.networkingRAC refreshCommand] execute:nil];
+            [[RACObserve(storesViewModel, storeItemModels) skip:1] subscribeNext:^(id x) {
+                [self.storesViewModels addObject:storesViewModel];
+                if ([item.menuId isEqualToString:self.menusViewModel.menuItemModels[self.menusViewModel.menuCount - 1].menuId]) {
+                    if ([NSThread isMainThread]) {
+                        [self.collectionView reloadData];
+                        self.pageControl.numberOfPages = [self.collectionView numberOfItemsInSection:0];
+                    } else {
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [self.collectionView reloadData];
+                            self.pageControl.numberOfPages = [self.collectionView numberOfItemsInSection:0];
+                        });
+                    }
+                }
+            }];
+        }
     }];
 }
 #pragma mark - Internet
@@ -82,7 +98,7 @@ static NSString *const cellIdentifier = @"cellId";
  }];
  [menuTask resume];
  }
- */
+ 
 - (void)fetchDishData {
     // 请求dish数据
     NSURL *dishURL = [NSURL URLWithString:@"https://link.xjtu.edu.cn/api/whattoeat/dish"];
@@ -112,21 +128,21 @@ static NSString *const cellIdentifier = @"cellId";
         [dishTask resume];
     }
 }
-
+*/
 #pragma mark - CollectionView DataSource & Delegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.viewModel.menuCount;
+    return self.menusViewModel.menuCount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WTECollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
-    cell.menuItemModel = self.viewModel.menuItemModels[indexPath.row];
-    cell.dishModel = self.dishModelArray[indexPath.row];
+    cell.menuItemModel = self.menusViewModel.menuItemModels[indexPath.row];
+    cell.viewModel = self.storesViewModels[indexPath.row];
     [cell setup];
     return cell;
     
@@ -145,8 +161,8 @@ static NSString *const cellIdentifier = @"cellId";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:segueIdentifier]) {
         WTETableViewController *vc = segue.destinationViewController;
-        vc.menuTitle = self.viewModel.menuItemModels[self.pageControl.currentPage].name;
-        vc.dishModel = self.dishModelArray[self.pageControl.currentPage];
+        vc.menuTitle = self.menusViewModel.menuItemModels[self.pageControl.currentPage].name;
+        vc.viewModel = self.storesViewModels[self.pageControl.currentPage];
     }
 }
 

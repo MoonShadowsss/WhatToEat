@@ -13,4 +13,5 @@
 @interface StoresViewModel : NSObject <YLNetworkingListRACProtocol>
 @property (assign, nonatomic) NSInteger storeCount;
 @property (nonatomic, copy) NSArray<StoreItemModel *> *storeItemModels;
+@property (nonatomic, copy) NSString *menuId;
 @end

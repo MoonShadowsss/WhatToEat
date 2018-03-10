@@ -6,9 +6,10 @@
 //  Copyright © 2018年 翟元浩. All rights reserved.
 //
 
-#import "GetStoreAPIManager.h"
+#import "RandomStoreAPIManager.h"
 
-@implementation GetStoreAPIManager
+NSString * const kRandomStoreAPIManagerParamsKeyMenuId = @"kRandomStoreAPIManagerParamsKeyMenuId";
+@implementation RandomStoreAPIManager
 - (BOOL)isAuth {
     return false;
 }
@@ -23,6 +24,8 @@
 
 - (NSDictionary *)reformParams:(NSDictionary *)params {
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
+    resultParams[@"menu_id"] = params[kRandomStoreAPIManagerParamsKeyMenuId];
+    resultParams[@"page_size"] = @5;
     return resultParams;
 }
 

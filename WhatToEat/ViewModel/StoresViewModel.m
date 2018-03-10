@@ -7,10 +7,10 @@
 //
 
 #import "StoresViewModel.h"
-#import "GetStoreAPIManager.h"
+#import "RandomStoreAPIManager.h"
 
-@interface StoresViewModel()
-@property (nonatomic, strong) GetStoreAPIManager *getStoreAPIManager;
+@interface StoresViewModel()<YLAPIManagerDataSource>
+@property (nonatomic, strong) RandomStoreAPIManager *randomStoreAPIManager;
 @end
 
 @implementation StoresViewModel
@@ -25,25 +25,35 @@
 
 - (void)setupRAC {
     @weakify(self);
-    [self.getStoreAPIManager.executionSignal subscribeNext:^(id x) {
+    [self.randomStoreAPIManager.executionSignal subscribeNext:^(id x) {
         @strongify(self);
-        NSArray *storeItemModels = [self.getStoreAPIManager fetchDataFromModel:StoreItemModel.class];
+        NSArray *storeItemModels = [self.randomStoreAPIManager fetchDataFromModel:StoreItemModel.class];
         self.storeItemModels = [storeItemModels copy];
         self.storeCount = self.storeItemModels.count;
     }];
 }
 
-- (id<YLNetworkingRACOperationProtocol>)networkingRAC {
-    return self.getStoreAPIManager;
+- (id<YLNetworkingListRACOperationProtocol>)networkingRAC {
+    return self.randomStoreAPIManager;
 }
 
 # pragma mark - Getter & Setter
-
-- (GetStoreAPIManager *)getStoreAPIManager {
-    if (_getStoreAPIManager == nil) {
-        _getStoreAPIManager = [[GetStoreAPIManager alloc] init];
+- (NSDictionary *)paramsForAPI:(YLBaseAPIManager *)manager {
+    NSDictionary *params = @{};
+    if (manager == self.randomStoreAPIManager) {
+        params = @{
+                   kRandomStoreAPIManagerParamsKeyMenuId:self.menuId?:@""
+                   };
     }
-    return _getStoreAPIManager;
+    return params;
+}
+
+- (RandomStoreAPIManager *)randomStoreAPIManager {
+    if (_randomStoreAPIManager == nil) {
+        _randomStoreAPIManager = [[RandomStoreAPIManager alloc] init];
+        _randomStoreAPIManager.dataSource = self;
+    }
+    return _randomStoreAPIManager;
 }
 
 @end

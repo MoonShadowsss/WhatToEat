@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WTEMenuItemModel.h"
-#import "WTEDishModel.h"
+#import "MenuItemModel.h"
+#import "StoresViewModel.h"
 #import "WTECardView.h"
 
 @class WTECollectionViewCell;
@@ -21,8 +21,8 @@
 @interface WTECollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) id<WTECollectionViewCellDelegate> delegate;
-@property (strong, nonatomic) WTEMenuItemModel *menuItemModel;
-@property (strong, nonatomic) WTEDishModel *dishModel;
+@property (strong, nonatomic) MenuItemModel *menuItemModel;
+@property (strong, nonatomic) StoresViewModel *viewModel;
 
 - (void)setup;
 

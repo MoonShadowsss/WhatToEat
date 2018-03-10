@@ -28,18 +28,25 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:35.0f / 255.0f green:173.0f / 255.0f blue:229.0f / 255.0f alpha:1];
     self.navigationItem.rightBarButtonItem = self.jumpButton;
-    [self.view addSubview:self.scrollView];
-    self.scrollView.frame = self.view.bounds;
-    [self.scrollView addSubview:self.pictureImageView];
+    
+    [self.view addSubview:self.pictureImageView];
     [self.pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(self.view.mas_width).multipliedBy(0.2);
         make.width.equalTo(self.pictureImageView.mas_height);
-        make.top.equalTo(self.scrollView.mas_top);
-        make.centerX.equalTo(self.scrollView.mas_centerX);
+        make.top.equalTo(self.view.mas_top).offset(50);
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+    [self.view addSubview:self.scrollView];
+    //    self.scrollView.frame = self.view.bounds;
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.pictureImageView.mas_bottom);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+        make.bottom.equalTo(self.view.mas_bottom);
     }];
     [self.scrollView addSubview:self.nameLabel];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.pictureImageView.mas_bottom);
+        make.top.equalTo(self.scrollView.mas_top);
         make.centerX.equalTo(self.scrollView.mas_centerX);
     }];
     [self.scrollView addSubview:self.locationLabel];

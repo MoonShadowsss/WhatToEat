@@ -1,21 +1,21 @@
 //
-//  AddStoreAPIManager.m
+//  GetStoreDetailAPIManager.m
 //  WhatToEat
 //
 //  Created by 殷子欣 on 2018/3/10.
 //  Copyright © 2018年 翟元浩. All rights reserved.
 //
 
-#import "AddStoreAPIManager.h"
+#import "GetStoreDetailAPIManager.h"
 
-NSString * const kAddStoreAPIManagerParamsKeyStoreId = @"kAddStoreAPIManagerParamsKeyStoreId";
-@implementation AddStoreAPIManager
+NSString * const kGetStoreDetailAPIManagerParamsKeyStoreId = @"kGetStoreDetailAPIManagerParamsKeyStoreId";
+@implementation GetStoreDetailAPIManager
 - (BOOL)isAuth {
     return false;
 }
 
 - (NSString *)path {
-    return @"addStore";
+    return @"getStoreDetail";
 }
 
 - (NSString *)apiVersion {
@@ -24,11 +24,12 @@ NSString * const kAddStoreAPIManagerParamsKeyStoreId = @"kAddStoreAPIManagerPara
 
 - (NSDictionary *)reformParams:(NSDictionary *)params {
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
-    resultParams[@"store_id"] = params[kAddStoreAPIManagerParamsKeyStoreId];
+    resultParams[@"store_id"] = params[kGetStoreDetailAPIManagerParamsKeyStoreId];
     return resultParams;
 }
 
 - (NSString *)keyOfResult {
     return @"data";
 }
+
 @end

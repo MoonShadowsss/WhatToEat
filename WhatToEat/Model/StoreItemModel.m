@@ -17,6 +17,7 @@
              @"pictureURL":@"store_picture",
              @"storeId":@"store_id",
              @"isLike":@"is_like",
+             @"information":@"store_info",
              };
 }
 

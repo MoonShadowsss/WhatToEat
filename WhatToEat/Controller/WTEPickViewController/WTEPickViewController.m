@@ -8,8 +8,6 @@
 
 
 #import "WTEPickViewController.h"
-#import "MenusViewModel.h"
-#import "StoresViewModel.h"
 
 static NSString *const segueIdentifier = @"tableViewControllerSegue";
 static NSString *const cellIdentifier = @"cellId";
@@ -17,9 +15,7 @@ static NSString *const cellIdentifier = @"cellId";
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) UIPageControl *pageControl;
-@property (strong, nonatomic) WTEMenuModel *menuModel;
-@property (strong, nonatomic) NSMutableArray<StoresViewModel *> *storesViewModels;
-@property (strong, nonatomic) MenusViewModel *menusViewModel;
+
 
 @end
 

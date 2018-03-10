@@ -8,21 +8,31 @@
 
 #import "DetailViewModel.h"
 #import "GetStoreDetailAPIManager.h"
+#import "StoreDetailModel.h"
 
 @interface DetailViewModel()<YLAPIManagerDataSource>
 @property (nonatomic, strong) YLBaseAPIManager *getStoreDetailAPIManager;
 @end
 
 @implementation DetailViewModel
-- (instancetype)initWithModel:(StoreDetailModel *)model {
+- (instancetype) init {
     self = [super init];
     if (self) {
-        _storeItemViewModel = [_storeItemViewModel initWithModel:model.storeItemModel];
-        self.dishModels = [model.dishModels copy];
+        [self setupRAC];
     }
     return self;
 }
 
+- (void)setupRAC {
+    @weakify(self);
+    
+    [self.getStoreDetailAPIManager.executionSignal subscribeNext:^(id x) {
+        @strongify(self);
+        StoreDetailModel *storeDetailModel = [self.getStoreDetailAPIManager fetchDataFromModel:StoreDetailModel.class];
+        _storeItemViewModel = [_storeItemViewModel initWithModel:storeDetailModel.storeItemModel];
+        _dishModels = [storeDetailModel.dishModels copy];
+    }];
+}
 - (id<YLNetworkingRACOperationProtocol>)networkingRAC {
     return self.getStoreDetailAPIManager;
 }

@@ -10,7 +10,7 @@
 
 #define kServerURL kServerURLFunc()
 //#define kLinkDefaultServerURL @"https://link.xjtu.edu.cn/api"
-#define kLinkDefaultServerURL @"http://10.30.1.142:9576/Django_doc"
+#define kLinkDefaultServerURL @"http://10.30.1.142:9576/api"
 
 NSString * kServerURLFunc();
 

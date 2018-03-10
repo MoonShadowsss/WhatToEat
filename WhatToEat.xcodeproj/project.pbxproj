@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		489DA7DB5E532BB8C6E26637 /* libPods-WhatToEat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0988F3D2841D378EC387416D /* libPods-WhatToEat.a */; };
 		6535F8B92053A720006545A2 /* StoresViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535F8B82053A720006545A2 /* StoresViewModel.m */; };
-		6535F8BC2053A832006545A2 /* GetStoreAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535F8BB2053A832006545A2 /* GetStoreAPIManager.m */; };
+		6535F8BC2053A832006545A2 /* RandomStoreAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535F8BB2053A832006545A2 /* RandomStoreAPIManager.m */; };
 		658EE90C2053819600E32680 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 658EE8A42053819600E32680 /* NSString+Base64.m */; };
 		658EE90D2053819600E32680 /* LKTranscoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 658EE8A82053819600E32680 /* LKTranscoder.m */; };
 		658EE90E2053819600E32680 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 658EE8A92053819600E32680 /* NSData+Base64.m */; };
@@ -85,8 +85,8 @@
 		5CAED6005E2A19E08A29D4B4 /* Pods-WhatToEat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhatToEat/Pods-WhatToEat.debug.xcconfig"; sourceTree = "<group>"; };
 		6535F8B72053A720006545A2 /* StoresViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoresViewModel.h; sourceTree = "<group>"; };
 		6535F8B82053A720006545A2 /* StoresViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoresViewModel.m; sourceTree = "<group>"; };
-		6535F8BA2053A832006545A2 /* GetStoreAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetStoreAPIManager.h; sourceTree = "<group>"; };
-		6535F8BB2053A832006545A2 /* GetStoreAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetStoreAPIManager.m; sourceTree = "<group>"; };
+		6535F8BA2053A832006545A2 /* RandomStoreAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RandomStoreAPIManager.h; sourceTree = "<group>"; };
+		6535F8BB2053A832006545A2 /* RandomStoreAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RandomStoreAPIManager.m; sourceTree = "<group>"; };
 		658EE8A02053819600E32680 /* NSDictionary+LKValueGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+LKValueGetter.h"; sourceTree = "<group>"; };
 		658EE8A12053819600E32680 /* Foundation+LKTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Foundation+LKTools.h"; sourceTree = "<group>"; };
 		658EE8A22053819600E32680 /* UITableViewCell+LKTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+LKTools.h"; sourceTree = "<group>"; };
@@ -494,8 +494,8 @@
 			children = (
 				658EE94A20538C4C00E32680 /* GetMenuAPIManager.h */,
 				658EE94B20538C4C00E32680 /* GetMenuAPIManager.m */,
-				6535F8BA2053A832006545A2 /* GetStoreAPIManager.h */,
-				6535F8BB2053A832006545A2 /* GetStoreAPIManager.m */,
+				6535F8BA2053A832006545A2 /* RandomStoreAPIManager.h */,
+				6535F8BB2053A832006545A2 /* RandomStoreAPIManager.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -867,7 +867,7 @@
 				658EE9162053819600E32680 /* NSBundle+MJRefresh.m in Sources */,
 				658EE92B2053819700E32680 /* Foundation+YLNetworking.m in Sources */,
 				658EE9272053819600E32680 /* YLAPIProxy.m in Sources */,
-				6535F8BC2053A832006545A2 /* GetStoreAPIManager.m in Sources */,
+				6535F8BC2053A832006545A2 /* RandomStoreAPIManager.m in Sources */,
 				658EE90D2053819600E32680 /* LKTranscoder.m in Sources */,
 				658EE9202053819600E32680 /* MJRefreshGifHeader.m in Sources */,
 				658EE92D2053819700E32680 /* MJRefresh+ReactiveExtension.m in Sources */,

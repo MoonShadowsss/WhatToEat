@@ -21,7 +21,7 @@
 
 #pragma mark - Life Cycle
 - (void)setup {
-    if (_dishModel != nil) {
+    if (_viewModel != nil) {
         [self addSubview:self.cardView];
         self.cardView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 0.767);
         [self.cardView reloadData];
@@ -42,7 +42,7 @@
 
 #pragma mark - Delegate & DataSource
 - (UIImage *)cardView:(WTECardView *)cardView imageAtIndex:(NSInteger)index {
-    NSData *pictureData = [NSData dataWithContentsOfURL:self.dishModel.dishModelItemArray[index].picture];
+    NSData *pictureData = [NSData dataWithContentsOfURL:self.viewModel.storeItemModels[index].pictureURL];
     if (pictureData != nil) {
         UIImage *picture = [UIImage imageWithData:pictureData];
         return picture;
@@ -52,23 +52,23 @@
 }
 
 - (BOOL)cardView:(WTECardView *)cardView likeAtIndex:(NSInteger)index {
-    return self.dishModel.dishModelItemArray[index].isLike;
+    return self.viewModel.storeItemModels[index].isLike;
 }
 
 - (NSString *)cardView:(WTECardView *)cardView nameAtIndex:(NSInteger)index {
-    return self.dishModel.dishModelItemArray[index].name;
+    return self.viewModel.storeItemModels[index].name;
 }
 
 - (NSString *)cardView:(WTECardView *)cardView locationAtIndex:(NSInteger)index {
-    return self.dishModel.dishModelItemArray[index].location;
+    return self.viewModel.storeItemModels[index].location;
 }
 
 - (NSInteger)numberOfCardItemViewInCardView:(WTECardView *)cardView {
-    return self.dishModel.dishCount;
+    return self.viewModel.storeCount;
 }
 
 - (NSString *)cardView:(WTECardView *)cardView dishIdAtIndex:(NSInteger)index {
-    return self.dishModel.dishModelItemArray[index].dishId;
+    return self.viewModel.storeItemModels[index].storeId;
 }
 
 - (void)likeButtonDidClick:(WTECardItemView *)cardItemView {
@@ -76,7 +76,7 @@
 }
 
 - (UIImage *)coverImageForCardView:(WTECardView *)cardView {
-    NSData *pictureData = [NSData dataWithContentsOfURL:self.menuItemModel.picture];
+    NSData *pictureData = [NSData dataWithContentsOfURL:self.menuItemModel.pictureURL];
     if (pictureData != nil) {
         UIImage *picture = [UIImage imageWithData:pictureData];
         return picture;
@@ -95,7 +95,7 @@
     self.menuNameLabel.font = [UIFont fontWithName:@"Helvetica" size:frame.size.height * 0.028];
 }
 
-- (void)setMenuItemModel:(WTEMenuItemModel *)menuItemModel {
+- (void)setMenuItemModel:(MenuItemModel *)menuItemModel {
     _menuItemModel = menuItemModel;
     self.menuNameLabel.text = menuItemModel.name;
 }

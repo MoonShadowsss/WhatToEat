@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor colorWithRed:35.0f / 255.0f green:173.0f / 255.0f blue:229.0f / 255.0f alpha:1];
     self.navigationItem.rightBarButtonItem = self.jumpButton;
     [self.view addSubview:self.scrollView];
     self.scrollView.frame = self.view.bounds;
@@ -55,7 +55,9 @@
     [self.scrollView addSubview:self.likeButton];
     [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.pictureImageView.mas_centerY);
-        make.right.equalTo(self.view.mas_right);
+        make.right.equalTo(self.view.mas_right).offset(-50);
+        make.width.equalTo(self.pictureImageView.mas_width).multipliedBy(0.25);
+        make.height.equalTo(self.likeButton.mas_width);
     }];
     [self.scrollView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,6 +87,28 @@
 }
 
 #pragma mark - Getter & Setter
+- (void)setStoreItemModel:(StoreItemModel *)storeItemModel {
+    _storeItemModel = storeItemModel;
+    self.nameLabel.text = storeItemModel.name;
+    self.locationLabel.text = storeItemModel.location;
+    if (storeItemModel.isLike) {
+        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    } else {
+        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
+    }
+    NSData *pictureData = [NSData dataWithContentsOfURL:storeItemModel.pictureURL];
+    if (pictureData == nil) {
+        self.pictureImageView.image = [UIImage imageNamed:@"food3"];
+    } else {
+        self.pictureImageView.image = [UIImage imageWithData:pictureData];
+    }
+//    @property (copy, nonatomic) NSString *name;
+//    @property (copy, nonatomic) NSString *location;
+//    @property (copy, nonatomic) NSString *storeId;
+//    @property (strong, nonatomic) NSURL *pictureURL;
+//    @property (assign, nonatomic) BOOL isLike;
+}
+
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] init];

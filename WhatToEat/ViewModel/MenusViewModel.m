@@ -10,7 +10,7 @@
 #import "GetMenuAPIManager.h"
 
 @interface MenusViewModel()
-@property (nonatomic, strong) GetMenuAPIManager *getMenuAPIManager;
+@property (nonatomic, strong) YLPageAPIManager *getMenuAPIManager;
 @end
 
 @implementation MenusViewModel
@@ -33,13 +33,13 @@
     }];
 }
 
-- (id<YLNetworkingRACOperationProtocol>)networkingRAC {
+- (id<YLNetworkingListRACOperationProtocol>)networkingRAC {
     return self.getMenuAPIManager;
 }
 
 # pragma mark - Getter & Setter
 
-- (GetMenuAPIManager *)getMenuAPIManager {
+- (YLPageAPIManager *)getMenuAPIManager {
     if (_getMenuAPIManager == nil) {
         _getMenuAPIManager = [[GetMenuAPIManager alloc] init];
     }

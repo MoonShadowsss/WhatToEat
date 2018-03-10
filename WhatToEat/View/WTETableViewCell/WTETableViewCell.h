@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WTEDishItemModel.h"
+#import "StoreItemModel.h"
 
 @interface WTETableViewCell : UITableViewCell
 
-@property (strong, nonatomic) WTEDishItemModel *dishItemModel;
+@property (strong, nonatomic) StoreItemModel *storeItemModel;
 
 - (void)setup;
 

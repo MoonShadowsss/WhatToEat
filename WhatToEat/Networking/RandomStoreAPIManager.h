@@ -8,6 +8,7 @@
 
 #import "YLPageAPIManager.h"
 
-@interface GetStoreAPIManager : YLPageAPIManager<YLPageAPIManager>
+extern NSString * const kRandomStoreAPIManagerParamsKeyMenuId;
+@interface RandomStoreAPIManager : YLPageAPIManager<YLPageAPIManager>
 
 @end

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "WTEDetailTableViewCell.h"
+#import "StoreItemModel.h"
 
 @interface WTEDetailViewController : UIViewController
 
-
+@property (strong, nonatomic) StoreItemModel *storeItemModel;
 
 @end

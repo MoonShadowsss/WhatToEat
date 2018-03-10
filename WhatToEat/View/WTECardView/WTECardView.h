@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WTECardItemView.h"
 #import "WTECardCoverView.h"
+#import "StoresViewModel.h"
 
 @class WTECardView;
 

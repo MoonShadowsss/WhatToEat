@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "StoreItemModel.h"
+#import "StoreDetailModel.h"
+#import "StoreItemViewModel.h"
 
 @interface DetailViewModel : NSObject
-@property (nonatomic, strong) StoreItemModel *model;
+@property (strong, nonatomic) StoreItemViewModel *storeItemViewModel;
+@property (copy, nonatomic) NSArray<DishModel *> *dishModels;
+
+- (instancetype)initWithModel:(StoreDetailModel *)model;
 @end

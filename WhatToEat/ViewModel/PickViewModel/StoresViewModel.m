@@ -10,7 +10,7 @@
 #import "RandomStoreAPIManager.h"
 
 @interface StoresViewModel()<YLAPIManagerDataSource>
-@property (nonatomic, strong) RandomStoreAPIManager *randomStoreAPIManager;
+@property (nonatomic, strong) YLPageAPIManager *randomStoreAPIManager;
 @end
 
 @implementation StoresViewModel
@@ -54,7 +54,7 @@
     return params;
 }
 
-- (RandomStoreAPIManager *)randomStoreAPIManager {
+- (YLPageAPIManager *)randomStoreAPIManager {
     if (_randomStoreAPIManager == nil) {
         _randomStoreAPIManager = [[RandomStoreAPIManager alloc] init];
         _randomStoreAPIManager.dataSource = self;

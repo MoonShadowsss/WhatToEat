@@ -15,7 +15,7 @@
 }
 
 - (NSString *)path {
-    return @"getMenu";
+    return @"getMenu/";
 }
 
 - (NSString *)apiVersion {

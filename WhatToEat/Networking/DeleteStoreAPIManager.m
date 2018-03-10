@@ -15,7 +15,7 @@ NSString * const kDeleteStoreAPIManagerParamsKeyStoreId = @"kDeleteStoreAPIManag
 }
 
 - (NSString *)path {
-    return @"deleteStore";
+    return @"deleteStore/";
 }
 
 - (NSString *)apiVersion {

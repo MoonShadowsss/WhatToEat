@@ -15,7 +15,7 @@ NSString * const kGetStoreAPIManagerParamsKeyMenuId = @"kGetStoreAPIManagerParam
 }
 
 - (NSString *)path {
-    return @"getStore";
+    return @"getStore/";
 }
 
 - (NSString *)apiVersion {

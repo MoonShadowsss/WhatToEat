@@ -10,6 +10,11 @@
 #import "LKNetworking.h"
 #import "StoreItemModel.h"
 
+extern NSString * const kNetworkingRACTypeAddStore;
+extern NSString * const kNetworkingRACTypeDeleteStore;
+
 @interface StoreItemViewModel : NSObject<YLNetworkingRACProtocol>
 @property (nonatomic, strong) StoreItemModel *model;
+
+- (instancetype)initWithModel:(StoreItemModel *)model;
 @end

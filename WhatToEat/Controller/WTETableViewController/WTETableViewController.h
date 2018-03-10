@@ -9,12 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "WTEAddViewController.h"
 #import "WTETableViewCell.h"
-#import "StoresViewModel.h"
 #import "WTEDetailViewController.h"
+#import "TabelViewModel.h"
 
 @interface WTETableViewController : UIViewController
 
 @property (copy, nonatomic) NSString *menuTitle;
-@property (strong, nonatomic) StoresViewModel *viewModel;
-
+@property (strong, nonatomic) TabelViewModel *viewModel;
 @end

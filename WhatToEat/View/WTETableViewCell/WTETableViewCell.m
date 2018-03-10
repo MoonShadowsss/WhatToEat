@@ -21,6 +21,13 @@
 
 @implementation WTETableViewCell
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self setupRAC];
+    }
+    return self;
+}
 #pragma mark - Life Cycle
 - (void)setup {
     [self addSubview:self.shadowView];
@@ -57,6 +64,24 @@
     }];
 }
 
+- (void)setupRAC {
+    @weakify(self);
+    [[RACObserve(self, storeItemViewModel) skip:1] subscribeNext:^(id x) {
+        @strongify(self);
+        NSLog(@"%@",self.storeItemViewModel);
+        NSLog(@"%@",self.storeItemViewModel.model);
+        NSLog(@"%@",self.storeItemViewModel.model.location);
+        self.locationLabel.text = self.storeItemViewModel.model.location;
+        self.nameLabel.text = self.storeItemViewModel.model.name;
+        self.isLike = self.storeItemViewModel.model.isLike;
+        NSData *pictureData = [NSData dataWithContentsOfURL:self.storeItemViewModel.model.pictureURL];
+        if (pictureData == nil) {
+            self.pictureImageView.image = [UIImage imageNamed:@"food2"];
+        } else {
+            self.pictureImageView.image = [UIImage imageWithData:pictureData];
+        }
+    }];
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     
 }
@@ -68,17 +93,11 @@
 }
 
 #pragma mark - Getter & Setter
-- (void)setStoreItemViewModel:(StoreItemViewModel *)storeItemViewModel {
-    _storeItemViewModel = storeItemViewModel;
-    self.locationLabel.text = storeItemViewModel.model.location;
-    self.nameLabel.text = storeItemViewModel.model.name;
-    self.isLike = storeItemViewModel.model.isLike;
-    NSData *pictureData = [NSData dataWithContentsOfURL:storeItemViewModel.model.pictureURL];
-    if (pictureData == nil) {
-        self.pictureImageView.image = [UIImage imageNamed:@"food2"];
-    } else {
-        self.pictureImageView.image = [UIImage imageWithData:pictureData];
+- (StoreItemViewModel *)storeItemViewModel {
+    if (_storeItemViewModel == nil) {
+        _storeItemViewModel = [[StoreItemViewModel alloc] init];
     }
+    return _storeItemViewModel;
 }
 
 - (UIView *)shadowView {

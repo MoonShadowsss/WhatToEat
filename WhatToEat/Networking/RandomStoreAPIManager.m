@@ -15,7 +15,7 @@ NSString * const kRandomStoreAPIManagerParamsKeyMenuId = @"kRandomStoreAPIManage
 }
 
 - (NSString *)path {
-    return @"randomStore";
+    return @"randomStore/";
 }
 
 - (NSString *)apiVersion {

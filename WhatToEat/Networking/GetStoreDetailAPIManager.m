@@ -15,7 +15,7 @@ NSString * const kGetStoreDetailAPIManagerParamsKeyStoreId = @"kGetStoreDetailAP
 }
 
 - (NSString *)path {
-    return @"getStoreDetail";
+    return @"getStoreDetail/";
 }
 
 - (NSString *)apiVersion {

@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LKNetworking.h"
+#import "StoreItemViewModel.h"
 
-@interface TabelViewModel : NSObject
-
+@interface TabelViewModel : NSObject<YLNetworkingListRACProtocol>
+@property (nonatomic, assign, readonly) BOOL hasNextPage;
+@property (assign, nonatomic) NSInteger storeCount;
+@property (nonatomic, copy) NSArray<StoreItemViewModel *> *storeItemViewModels;
+@property (nonatomic, copy) NSString *menuId;
 @end

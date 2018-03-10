@@ -7,14 +7,17 @@
 //
 
 #import "WTETableViewController.h"
+#import "ViewsConfig.h"
 
 static NSString *const addViewControllersegueIdentifier = @"AddViewControllerSegue";
 static NSString *const detailViewControllerSegueIdentifier = @"detailViewControllerSegue";
-@interface WTETableViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@interface WTETableViewController () <LKEmptyManagerDelegate,UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIView *backView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIBarButtonItem *addButton;
+@property (nonatomic, strong) LKEmptyManager *emptyManager;
 
 @end
 
@@ -35,6 +38,37 @@ static NSString *const detailViewControllerSegueIdentifier = @"detailViewControl
     [self.backView addSubview:self.tableView];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, self.tableView.frame.size.width * 0.036, 0, self.tableView.frame.size.width * 0.036);
     self.tableView.rowHeight = self.tableView.frame.size.height * 0.125;
+    
+    [self setupRAC];
+    [[self.viewModel.networkingRAC refreshCommand] execute:nil];
+}
+
+- (void)setupRAC {
+    @weakify(self);
+    [[[RACObserve(self.viewModel, storeItemViewModels) skip:1]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
+         @strongify(self);
+         [self.tableView reloadData];
+         if(self.viewModel.storeItemViewModels.count == 0) {
+             [self.emptyManager reloadEmptyDataSet];
+         }
+         [self.tableView.mj_header endRefreshing];
+         if (self.viewModel.hasNextPage) {
+             [self.tableView.mj_footer endRefreshing];
+         } else {
+             [self.tableView.mj_footer endRefreshingWithNoMoreData];
+         }
+     }];
+    
+    
+    [self.viewModel.networkingRAC.requestErrorSignal
+     subscribeNext:^(YLResponseError *error) {
+         @strongify(self);
+         [self.emptyManager reloadEmptyDataSet];
+         [self.tableView.mj_header endRefreshing];
+         [self.tableView.mj_footer endRefreshing];
+     }];
 }
 
 #pragma mark - TableView Delegate & DataSource
@@ -85,6 +119,15 @@ static NSString *const detailViewControllerSegueIdentifier = @"detailViewControl
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableView.separatorColor = [UIColor blackColor];
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        
+        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingCommand:self.viewModel.networkingRAC.refreshCommand];
+        _tableView.tableFooterView = [UIView new];
+        _tableView.showsVerticalScrollIndicator = NO;
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingCommand:self.viewModel.networkingRAC.requestNextPageCommand];
+        [footer setTitle:@"没啦~ 被看光啦 (*/ω＼*)" forState:MJRefreshStateNoMoreData];
+        footer.automaticallyHidden = YES;
+        _tableView.mj_footer = footer;
     }
     return _tableView;
 }
@@ -105,4 +148,22 @@ static NSString *const detailViewControllerSegueIdentifier = @"detailViewControl
     return _addButton;
 }
 
+- (TabelViewModel *)viewModel {
+    if (_viewModel == nil) {
+        _viewModel = [[TabelViewModel alloc] init];
+    }
+    return _viewModel;
+}
+
+- (LKEmptyManager *)emptyManager {
+    if (_emptyManager == nil) {
+        _emptyManager = LKEmptyManagerWith(self.tableView,LKEmptyManagerStylePreview);
+        _emptyManager.title = @"暂无附近餐馆信息";
+        _emptyManager.delegate = self;
+        _emptyManager.verticalOffset = 0;
+        _emptyManager.backgroundColor = [UIColor whiteColor];
+        _emptyManager.allowTouch = NO;
+    }
+    return _emptyManager;
+}
 @end

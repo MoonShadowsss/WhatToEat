@@ -15,8 +15,6 @@
 @property (strong, nonatomic) NSMutableArray<WTECardItemView *> *cardItemViews;
 @property (assign, nonatomic) NSInteger visibleCardItemViewCount;
 @property (assign, nonatomic) CGPoint firstCardItemViewCenter;
-@property (assign, nonatomic) CGPoint sencondCardItemViewCenter;
-@property (assign, nonatomic) CGPoint thirdCardItemViewCenter;
 @property (assign, nonatomic) CGRect firstCardItemViewFrame;
 @property (assign, nonatomic) CGRect secondCardItemViewFrame;
 @property (assign, nonatomic) CGRect thirdCardItemViewFrame;
@@ -40,6 +38,8 @@
         self.firstCardItemViewFrame = self.cardItemViews[0].frame;
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandle:)];
         [self addGestureRecognizer:pan];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandle:)];
+        [self addGestureRecognizer:tap];
         self.visibleCardItemViewCount = 1;
     }
     if (totalNumberOfItemView > 1) {
@@ -47,7 +47,6 @@
         self.cardItemViews[1].frame = CGRectMake(self.frame.size.width / 2 - (self.frame.size.width * 22 / 27) / 2, self.frame.size.height - self.frame.size.width * 22 / 27 / (self.frame.size.width) * (self.frame.size.height * 180 / 191) - self.frame.size.height * 180 / 191 * 11 / 360, self.frame.size.width * 22 / 27, self.frame.size.width * 22 / 27 / (self.frame.size.width) * (self.frame.size.height * 180 / 191));
         [self addSubview:self.cardItemViews[1]];
         [self.cardItemViews[1] setup];
-        self.sencondCardItemViewCenter = self.cardItemViews[1].center;
         self.secondCardItemViewFrame = self.cardItemViews[1].frame;
         [self sendSubviewToBack:self.cardItemViews[1]];
         self.cardItemViews[1].userInteractionEnabled = NO;
@@ -58,7 +57,6 @@
         self.cardItemViews[2].frame = CGRectMake(self.frame.size.width / 2 - self.frame.size.width * 17 / 27 / 2, self.frame.size.height - self.frame.size.width * 17 / 27 / (self.frame.size.width) * (self.frame.size.height * 180 / 191), self.frame.size.width * 17 / 27, self.frame.size.width * 17 / 27 / (self.frame.size.width) * (self.frame.size.height * 180 / 191));
         [self addSubview:self.cardItemViews[2]];
         [self.cardItemViews[2] setup];
-        self.thirdCardItemViewCenter = self.cardItemViews[2].center;
         self.thirdCardItemViewFrame = self.cardItemViews[2].frame;
         self.cardItemViews[2].alpha = 0.5;
         self.cardItemViews[2].userInteractionEnabled = NO;
@@ -78,6 +76,7 @@
     self.cardItemViews[arrayIndex].placeLabel.text = [self placeAtIndex:index];
     self.cardItemViews[arrayIndex].isLike = [self likeAtIndex:index];
     self.cardItemViews[arrayIndex].dishId = [self dishIdAtIndex:index];
+    self.cardItemViews[arrayIndex].viewModel = [self viewModelAtIndex:index];
 }
 
 #pragma mark - Gesture event
@@ -104,7 +103,7 @@
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      self.cardCoverView.center = self.firstCardItemViewCenter;
-                                     self.cardCoverView.transform = CGAffineTransformMakeRotation(0);
+                                     self.cardCoverView.transform = CGAffineTransformIdentity;
                                  }
                                  completion:^(BOOL finished) {
                                      self.userInteractionEnabled = YES;
@@ -118,7 +117,7 @@
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      self.cardItemViews[0].center = self.firstCardItemViewCenter;
-                                     self.cardItemViews[0].transform = CGAffineTransformMakeRotation(0);
+                                     self.cardItemViews[0].transform = CGAffineTransformIdentity;
                                  }
                                  completion:^(BOOL finished) {
                                      self.userInteractionEnabled = YES;
@@ -126,6 +125,12 @@
             }
         }
         
+    }
+}
+
+- (void)tapGestureHandle:(UITapGestureRecognizer *)tapGesture {
+    if ([self.dataSource respondsToSelector:@selector(cardView:didClickAtIndex:)]) {
+        [self.dataSource cardView:self didClickAtIndex:self.currentIndex];
     }
 }
 
@@ -218,6 +223,10 @@
 #pragma mark - Data Source
 - (UIImage *)coverImage {
     return [self.dataSource coverImageForCardView:self];
+}
+
+- (StoreItemViewModel *)viewModelAtIndex:(NSInteger)index{
+    return [self.dataSource cardView:self viewModelAtIndex:index];
 }
 
 - (NSString *)dishIdAtIndex:(NSInteger)index {

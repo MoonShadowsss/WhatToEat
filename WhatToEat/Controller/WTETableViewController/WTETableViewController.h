@@ -10,6 +10,7 @@
 #import "WTEAddViewController.h"
 #import "WTETableViewCell.h"
 #import "StoresViewModel.h"
+#import "WTEDetailViewController.h"
 
 @interface WTETableViewController : UIViewController
 

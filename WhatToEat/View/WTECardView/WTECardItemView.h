@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreItemViewModel.h"
 
 @class WTECardItemView;
 
@@ -17,6 +18,7 @@
 @property (strong, nonatomic) UILabel *placeLabel;
 @property (strong, nonatomic) UIImageView *imageView;
 @property (assign, nonatomic) BOOL isLike;
+@property (strong, nonatomic) StoreItemViewModel *viewModel;
 
 - (void)setup;
 

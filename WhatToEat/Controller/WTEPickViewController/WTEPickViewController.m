@@ -9,7 +9,8 @@
 
 #import "WTEPickViewController.h"
 
-static NSString *const segueIdentifier = @"tableViewControllerSegue";
+static NSString *const tableViewControllerSegueIdentifier = @"tableViewControllerSegue";
+static NSString *const detailViewControllerSegueIdentifier = @"detailViewControllerSegue";
 static NSString *const cellIdentifier = @"cellId";
 @interface WTEPickViewController () <UICollectionViewDataSource, UICollectionViewDelegate, WTECollectionViewCellDelegate>
 
@@ -48,7 +49,6 @@ static NSString *const cellIdentifier = @"cellId";
     
     self.pageControl.frame = CGRectMake(0, self.view.frame.size.height * 0.94, self.view.frame.size.width, self.view.frame.size.height * 0.06);
     [self.view addSubview:self.pageControl];
-    
 }
 
 - (void)setupRAC {
@@ -141,7 +141,6 @@ static NSString *const cellIdentifier = @"cellId";
     cell.viewModel = self.storesViewModels[indexPath.row];
     [cell setup];
     return cell;
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -150,12 +149,12 @@ static NSString *const cellIdentifier = @"cellId";
 }
 
 - (void)editButtonDidClickOnCollectionViewCell:(WTECollectionViewCell *)collectionViewCell {
-    [self performSegueWithIdentifier:segueIdentifier sender:collectionViewCell];
+    [self performSegueWithIdentifier:tableViewControllerSegueIdentifier sender:collectionViewCell];
 }
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:segueIdentifier]) {
+    if ([segue.identifier isEqualToString:tableViewControllerSegueIdentifier]) {
         WTETableViewController *vc = segue.destinationViewController;
         vc.menuTitle = self.menusViewModel.menuItemModels[self.pageControl.currentPage].name;
         vc.viewModel = self.storesViewModels[self.pageControl.currentPage];

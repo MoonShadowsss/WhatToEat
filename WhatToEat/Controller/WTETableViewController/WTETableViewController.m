@@ -8,7 +8,8 @@
 
 #import "WTETableViewController.h"
 
-static NSString *const segueIdentifier = @"AddViewControllerSegue";
+static NSString *const addViewControllersegueIdentifier = @"AddViewControllerSegue";
+static NSString *const detailViewControllerSegueIdentifier = @"detailViewControllerSegue";
 @interface WTETableViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIView *backView;
@@ -52,16 +53,24 @@ static NSString *const segueIdentifier = @"AddViewControllerSegue";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:detailViewControllerSegueIdentifier sender:indexPath];
+}
+
 #pragma mark - Add Button Event
 - (void)addButtonDidClick:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:segueIdentifier sender:self];
+    [self performSegueWithIdentifier:addViewControllersegueIdentifier sender:self];
 }
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqual:segueIdentifier]) {
+    if ([segue.identifier isEqualToString:addViewControllersegueIdentifier]) {
         WTEAddViewController *vc = segue.destinationViewController;
         vc.menuId = self.viewModel.menuId;
+    } else if ([segue.identifier isEqualToString:detailViewControllerSegueIdentifier]) {
+        WTEDetailViewController *vc = segue.destinationViewController;
+        NSIndexPath *index = (NSIndexPath *)sender;
+        vc.storeItemViewModel = self.viewModel.storeItemViewModels[index.row];
     }
 }
 

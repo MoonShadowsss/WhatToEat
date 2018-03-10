@@ -23,6 +23,7 @@
                     <navigationItem key="navigationItem" id="1jt-iT-p3R"/>
                     <connections>
                         <segue destination="uB4-rD-0ot" kind="show" identifier="tableViewControllerSegue" id="qHs-9Z-QJ1"/>
+                        <segue destination="c0t-2t-qGf" kind="show" identifier="detailViewControllerSegue" id="Kqy-YQ-8VH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YMc-zw-uOB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -41,11 +42,27 @@
                     </view>
                     <connections>
                         <segue destination="q8v-62-WQN" kind="show" identifier="AddViewControllerSegue" id="t9F-7y-5uN"/>
+                        <segue destination="c0t-2t-qGf" kind="show" identifier="detailViewControllerSegue" id="AxU-J3-ICf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zpi-R3-2Bq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1034" y="91"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="F9C-hE-5jH">
+            <objects>
+                <viewController id="c0t-2t-qGf" customClass="WTEDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GHH-mV-oNX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="kA5-Pa-te9"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gft-yF-B3K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="572" y="944"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="KKs-Et-zCI">
@@ -79,4 +96,7 @@
             <point key="canvasLocation" x="-735" y="90"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Kqy-YQ-8VH"/>
+    </inferredMetricsTieBreakers>
 </document>

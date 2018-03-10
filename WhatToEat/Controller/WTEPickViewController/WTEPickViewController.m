@@ -53,8 +53,6 @@ static NSString *const cellIdentifier = @"cellId";
     
     self.pageControl.frame = CGRectMake(0, self.view.frame.size.height * 0.94, self.view.frame.size.width, self.view.frame.size.height * 0.06);
     [self.view addSubview:self.pageControl];
-    
-    
 }
 
 - (void)updateLocation {
@@ -162,4 +160,3 @@ static NSString *const cellIdentifier = @"cellId";
 }
 
 @end
-

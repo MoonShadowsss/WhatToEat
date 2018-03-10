@@ -598,11 +598,11 @@
 		889806DD20159299004F1704 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				889806CC20159286004F1704 /* Main.storyboard */,
 				8880594920539DE000BC630F /* WTEDetailTableViewCell */,
 				8881409F203E8936003F9743 /* WTETableViewCell */,
 				88D1638C201B2C3D00F2143B /* WTECollectionView */,
 				889806E020159367004F1704 /* WTECardView */,
-				889806CC20159286004F1704 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";

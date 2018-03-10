@@ -40,6 +40,8 @@
         self.firstCardItemViewFrame = self.cardItemViews[0].frame;
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandle:)];
         [self addGestureRecognizer:pan];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandle:)];
+        [self addGestureRecognizer:tap];
         self.visibleCardItemViewCount = 1;
     }
     if (totalNumberOfItemView > 1) {
@@ -126,6 +128,12 @@
             }
         }
         
+    }
+}
+
+- (void)tapGestureHandle:(UITapGestureRecognizer *)tapGesture {
+    if ([self.dataSource respondsToSelector:@selector(cardView:didClickAtIndex:)]) {
+        [self.dataSource cardView:self didClickAtIndex:self.currentIndex];
     }
 }
 

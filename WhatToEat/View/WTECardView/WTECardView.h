@@ -24,6 +24,7 @@
 
 @optional
 - (void)cardViewNeedsMoreData:(WTECardView *)cardView;
+- (void)cardView:(WTECardView *)cardView didClickAtIndex:(NSInteger)index;
 
 @end
 

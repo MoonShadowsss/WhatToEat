@@ -10,4 +10,6 @@
 
 @interface WTEDetailTableViewCell : UITableViewCell
 
+- (void)setup;
+
 @end

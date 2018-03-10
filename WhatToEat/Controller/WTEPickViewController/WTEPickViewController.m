@@ -10,7 +10,8 @@
 #import "WTEPickViewController.h"
 #import "PickViewModel.h"
 
-static NSString *const segueIdentifier = @"tableViewControllerSegue";
+static NSString *const tableViewControllerSegueIdentifier = @"tableViewControllerSegue";
+static NSString *const detailViewControllerSegueIdentifier = @"detailViewControllerSegue";
 static NSString *const cellIdentifier = @"cellId";
 @interface WTEPickViewController () <UICollectionViewDataSource, UICollectionViewDelegate, WTECollectionViewCellDelegate>
 
@@ -70,7 +71,7 @@ static NSString *const cellIdentifier = @"cellId";
     NSURL *menuURL = [NSURL URLWithString:menuURLDirection];
     NSMutableURLRequest *menuRequest = [NSMutableURLRequest requestWithURL:menuURL];
     menuRequest.HTTPMethod = @"POST";
-    menuRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:menuParam options:NSJSONWritingPrettyPrinted error:nil];
+//    menuRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:menuParam options:NSJSONWritingPrettyPrinted error:nil];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionTask *menuTask = [session dataTaskWithRequest:menuRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         self.menuModel = [[WTEMenuModel alloc] initWithData:data];
@@ -87,8 +88,8 @@ static NSString *const cellIdentifier = @"cellId";
         NSString *menuId = item.menuId;
         NSMutableURLRequest *dishRequest = [NSMutableURLRequest requestWithURL:dishURL];
         dishRequest.HTTPMethod = @"POST";
-        NSDictionary *dishParam = @{@"user_id": self.userModel.userId, @"user_token": self.userModel.userToken, @"menu_id": menuId};
-        dishRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:dishParam options:NSJSONWritingPrettyPrinted error:nil];
+        NSDictionary *dishParam = @{@"menu_id": menuId};
+//        dishRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:dishParam options:NSJSONWritingPrettyPrinted error:nil];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionTask *dishTask = [session dataTaskWithRequest:dishRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             WTEDishModel *dishModel = [[WTEDishModel alloc] initWithData:data];
@@ -135,16 +136,18 @@ static NSString *const cellIdentifier = @"cellId";
 }
 
 - (void)editButtonDidClickOnCollectionViewCell:(WTECollectionViewCell *)collectionViewCell {
-    [self performSegueWithIdentifier:segueIdentifier sender:collectionViewCell];
+    [self performSegueWithIdentifier:tableViewControllerSegueIdentifier sender:collectionViewCell];
 }
 
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:segueIdentifier]) {
+    if ([segue.identifier isEqualToString:tableViewControllerSegueIdentifier]) {
         WTETableViewController *vc = segue.destinationViewController;
         vc.menuTitle = self.menuModel.menuModelItemArray[self.pageControl.currentPage].name;
         vc.userModel = self.userModel;
         vc.dishModel = self.dishModelArray[self.pageControl.currentPage];
+    } else if ([segue.identifier isEqualToString:detailViewControllerSegueIdentifier]) {
+        
     }
 }
 

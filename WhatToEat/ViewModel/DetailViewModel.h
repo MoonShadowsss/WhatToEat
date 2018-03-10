@@ -15,5 +15,4 @@
 @property (strong, nonatomic) StoreItemViewModel *storeItemViewModel;
 @property (copy, nonatomic) NSArray<DishModel *> *dishModels;
 
-- (instancetype)initWithModel:(StoreDetailModel *)model;
 @end

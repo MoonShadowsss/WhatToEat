@@ -85,7 +85,8 @@ static NSString *const cellIdentifier = @"cellId";
             StoresViewModel *storesViewModel = [[StoresViewModel alloc] init];
             storesViewModel.menuId = item.menuId;
             [[storesViewModel.networkingRAC refreshCommand] execute:nil];
-            [[RACObserve(storesViewModel, storeItemViewModels) skip:1] subscribeNext:^(id x) {
+            [[RACSignal merge:@[[RACObserve(storesViewModel, storeItemViewModels) skip:1],
+                                [storesViewModel.networkingRAC requestErrorSignal]]] subscribeNext:^(id x) {
                 [self.viewModel.storesViewModels addObject:storesViewModel];
                 if ([item.menuId isEqualToString:self.viewModel.menusViewModel.menuItemModels[self.viewModel.menusViewModel.menuCount - 1].menuId]) {
                     if ([NSThread isMainThread]) {
@@ -116,7 +117,11 @@ static NSString *const cellIdentifier = @"cellId";
     WTECollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
     cell.menuItemModel = self.viewModel.menusViewModel.menuItemModels[indexPath.row];
-    cell.viewModel = self.viewModel.storesViewModels[indexPath.row];
+    if (indexPath.row < self.viewModel.storesViewModels.count) {
+        cell.viewModel = self.viewModel.storesViewModels[indexPath.row];
+    } else {
+        cell.viewModel = nil;
+    }
     [cell setup];
     return cell;
 }

@@ -71,6 +71,8 @@
 		887BC2DF204693F500FC46D8 /* WTEAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887BC2DE204693F500FC46D8 /* WTEAddViewController.m */; };
 		8880594820539DDA00BC630F /* WTEDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880594720539DDA00BC630F /* WTEDetailViewController.m */; };
 		8880594C20539DF600BC630F /* WTEDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880594B20539DF600BC630F /* WTEDetailTableViewCell.m */; };
+		888059592054031C00BC630F /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 888059552054031B00BC630F /* UIImageView+LBBlurredImage.m */; };
+		8880595A2054031C00BC630F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 888059572054031C00BC630F /* UIImage+ImageEffects.m */; };
 		888140A2203EB4B7003F9743 /* WTETableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 888140A1203EB4B7003F9743 /* WTETableViewController.m */; };
 		888140A5203EB5DB003F9743 /* WTETableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888140A4203EB5DB003F9743 /* WTETableViewCell.m */; };
 		889806C820159286004F1704 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 889806C720159286004F1704 /* AppDelegate.m */; };
@@ -222,6 +224,10 @@
 		8880594720539DDA00BC630F /* WTEDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTEDetailViewController.m; sourceTree = "<group>"; };
 		8880594A20539DF600BC630F /* WTEDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTEDetailTableViewCell.h; sourceTree = "<group>"; };
 		8880594B20539DF600BC630F /* WTEDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTEDetailTableViewCell.m; sourceTree = "<group>"; };
+		888059552054031B00BC630F /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
+		888059562054031B00BC630F /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
+		888059572054031C00BC630F /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		888059582054031C00BC630F /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		888140A0203EB4B7003F9743 /* WTETableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTETableViewController.h; sourceTree = "<group>"; };
 		888140A1203EB4B7003F9743 /* WTETableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTETableViewController.m; sourceTree = "<group>"; };
 		888140A3203EB5DB003F9743 /* WTETableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTETableViewCell.h; sourceTree = "<group>"; };
@@ -573,6 +579,17 @@
 			path = WTEDetailTableViewCell;
 			sourceTree = "<group>";
 		};
+		88805954205402FB00BC630F /* WTEBlurImagView */ = {
+			isa = PBXGroup;
+			children = (
+				888059582054031C00BC630F /* UIImage+ImageEffects.h */,
+				888059572054031C00BC630F /* UIImage+ImageEffects.m */,
+				888059562054031B00BC630F /* UIImageView+LBBlurredImage.h */,
+				888059552054031B00BC630F /* UIImageView+LBBlurredImage.m */,
+			);
+			path = WTEBlurImagView;
+			sourceTree = "<group>";
+		};
 		8881409B203E88EB003F9743 /* WTETableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,6 +658,7 @@
 		889806DD20159299004F1704 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				88805954205402FB00BC630F /* WTEBlurImagView */,
 				889806CC20159286004F1704 /* Main.storyboard */,
 				8880594920539DE000BC630F /* WTEDetailTableViewCell */,
 				8881409F203E8936003F9743 /* WTETableViewCell */,
@@ -891,6 +909,7 @@
 				65575B2D2053E37E00D94DD7 /* DishModel.m in Sources */,
 				658EE94F20538FEF00E32680 /* DetailViewModel.m in Sources */,
 				887BC2DF204693F500FC46D8 /* WTEAddViewController.m in Sources */,
+				8880595A2054031C00BC630F /* UIImage+ImageEffects.m in Sources */,
 				658EE9212053819600E32680 /* MJRefreshFooter.m in Sources */,
 				658EE91A2053819600E32680 /* MJRefreshBackNormalFooter.m in Sources */,
 				658EE91B2053819600E32680 /* MJRefreshAutoStateFooter.m in Sources */,
@@ -901,6 +920,7 @@
 				8880594820539DDA00BC630F /* WTEDetailViewController.m in Sources */,
 				658EE9162053819600E32680 /* NSBundle+MJRefresh.m in Sources */,
 				658EE92B2053819700E32680 /* Foundation+YLNetworking.m in Sources */,
+				888059592054031C00BC630F /* UIImageView+LBBlurredImage.m in Sources */,
 				658EE9272053819600E32680 /* YLAPIProxy.m in Sources */,
 				6535F8BC2053A832006545A2 /* RandomStoreAPIManager.m in Sources */,
 				658EE90D2053819600E32680 /* LKTranscoder.m in Sources */,

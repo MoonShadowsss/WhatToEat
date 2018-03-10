@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "WTEDetailTableViewCell.h"
 #import "StoreItemViewModel.h"
+#import "UIImageView+LBBlurredImage.h"
 
 @interface WTEDetailViewController : UIViewController
 
-//@property (strong, nonatomic) StoreItemModel *storeItemModel;
 @property (strong, nonatomic) StoreItemViewModel *storeItemViewModel;
 
 @end

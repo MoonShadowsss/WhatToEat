@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "WTECollectionViewLayout.h"
 #import "WTECollectionViewCell.h"
-#import "WTEMenuModel.h"
-#import "WTEDishModel.h"
 #import "WTETableViewController.h"
 
 @interface WTEPickViewController : UIViewController

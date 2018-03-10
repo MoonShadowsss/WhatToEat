@@ -12,6 +12,7 @@
 @interface WTEDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *backgroundImageView;
 @property (strong, nonatomic) UIImageView *pictureImageView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UILabel *nameLabel;
@@ -29,49 +30,57 @@
     self.view.backgroundColor = [UIColor colorWithRed:35.0f / 255.0f green:173.0f / 255.0f blue:229.0f / 255.0f alpha:1];
     self.navigationItem.rightBarButtonItem = self.jumpButton;
     
-    [self.view addSubview:self.pictureImageView];
-    [self.pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(self.view.mas_width).multipliedBy(0.2);
-        make.width.equalTo(self.pictureImageView.mas_height);
-        make.top.equalTo(self.view.mas_top).offset(50);
+    [self.view addSubview:self.backgroundImageView];
+    [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
         make.centerX.equalTo(self.view.mas_centerX);
+        make.width.equalTo(self.view.mas_width);
+        make.height.equalTo(self.backgroundImageView.mas_width);
     }];
+    [self.backgroundImageView setImageToBlur:self.pictureImageView.image completionBlock:nil];
+    
     [self.view addSubview:self.scrollView];
-    //    self.scrollView.frame = self.view.bounds;
+    self.scrollView.backgroundColor = [UIColor clearColor];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.pictureImageView.mas_bottom);
+        make.top.equalTo(self.view.mas_top).offset(64);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
-    [self.scrollView addSubview:self.nameLabel];
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.scrollView addSubview:self.pictureImageView];
+    [self.pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(self.view.mas_width).multipliedBy(0.2);
+        make.width.equalTo(self.pictureImageView.mas_height);
         make.top.equalTo(self.scrollView.mas_top);
-        make.centerX.equalTo(self.scrollView.mas_centerX);
-    }];
-    [self.scrollView addSubview:self.locationLabel];
-    [self.locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLabel.mas_bottom);
-        make.centerX.equalTo(self.scrollView.mas_centerX);
-    }];
-    [self.scrollView addSubview:self.informationLabel];
-    [self.informationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.locationLabel.mas_bottom);
-        make.centerX.equalTo(self.scrollView.mas_centerX);
+//        make.left.equalTo(self.scrollView.mas_leftMargin);
+        make.centerX.equalTo(self.view.mas_centerX);
     }];
     [self.scrollView addSubview:self.likeButton];
     [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.pictureImageView.mas_centerY);
-        make.right.equalTo(self.view.mas_right).offset(-50);
+        make.centerX.equalTo(self.scrollView.mas_centerX);
         make.width.equalTo(self.pictureImageView.mas_width).multipliedBy(0.25);
         make.height.equalTo(self.likeButton.mas_width);
+        make.top.equalTo(self.pictureImageView.mas_bottom).offset(10);
+    }];
+    [self.scrollView addSubview:self.nameLabel];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.likeButton.mas_bottom).offset(10);
+        make.centerX.equalTo(self.scrollView.mas_centerX);
+    }];
+    
+    [self.scrollView addSubview:self.locationLabel];
+    [self.locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.nameLabel.mas_bottom).offset(10);
+        make.centerX.equalTo(self.scrollView.mas_centerX);
     }];
     [self.scrollView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.informationLabel.mas_bottom);
+        make.top.equalTo(self.locationLabel.mas_bottom);
         make.left.equalTo(self.scrollView.mas_left);
         make.right.equalTo(self.scrollView.mas_right);
+        make.bottom.equalTo(self.view.mas_bottom);
     }];
+    self.scrollView.contentSize = CGSizeMake(0, self.scrollView.frame.size.height + self.tableView.frame.origin.y);
 }
 
 - (void)jumpButtonDidClick:(UIBarButtonItem *)sender {
@@ -110,6 +119,15 @@
     } else {
         self.pictureImageView.image = [UIImage imageWithData:pictureData];
     }
+
+}
+
+- (UIImageView *)backgroundImageView {
+    if (_backgroundImageView == nil) {
+        _backgroundImageView = [[UIImageView alloc] init];
+        _backgroundImageView.contentMode = UIViewContentModeScaleToFill;
+    }
+    return _backgroundImageView;
 }
 
 - (UIScrollView *)scrollView {
@@ -123,6 +141,8 @@
     if (_pictureImageView == nil) {
         _pictureImageView = [[UIImageView alloc] init];
         _pictureImageView.contentMode = UIViewContentModeScaleToFill;
+        _pictureImageView.layer.masksToBounds = YES;
+        _pictureImageView.layer.cornerRadius = 5;
     }
     return _pictureImageView;
 }

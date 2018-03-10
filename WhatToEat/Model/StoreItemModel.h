@@ -14,7 +14,9 @@
 @property (copy, nonatomic) NSString *name;
 @property (copy, nonatomic) NSString *location;
 @property (copy, nonatomic) NSString *storeId;
+@property (copy, nonatomic) NSString *information;
 @property (strong, nonatomic) NSURL *pictureURL;
+@property (strong, nonatomic) NSURL *buyURL;
 @property (assign, nonatomic) BOOL isLike;
 
 @end

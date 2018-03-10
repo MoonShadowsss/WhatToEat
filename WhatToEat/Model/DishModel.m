@@ -1,23 +1,20 @@
 //
-//  StoreItemModel.m
+//  DishModel.m
 //  WhatToEat
 //
 //  Created by 殷子欣 on 2018/3/10.
 //  Copyright © 2018年 翟元浩. All rights reserved.
 //
 
-#import "StoreItemModel.h"
+#import "DishModel.h"
 
-@implementation StoreItemModel
-
+@implementation DishModel
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"name":@"store_name",
-             @"location":@"store_location",
-             @"pictureURL":@"store_image",
-             @"storeId":@"store_id",
-             @"isLike":@"is_like",
-             @"information":@"store_info",
+             @"name":@"dish_name",
+             @"location":@"dish_cost",
+             @"pictureURL":@"dish_picture",
+             @"information":@"dish_info",
              };
 }
 
@@ -26,5 +23,4 @@
         return [NSURL URLWithString:value];
     }];
 }
-
 @end

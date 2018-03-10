@@ -71,6 +71,10 @@
     return self.viewModel.storeItemViewModels[index].model.storeId;
 }
 
+- (StoreItemViewModel *)cardView:(WTECardView *)cardView viewModelAtIndex:(NSInteger)index {
+    return self.viewModel.storeItemViewModels[index];
+}
+
 - (void)likeButtonDidClick:(WTECardItemView *)cardItemView {
     NSLog(@"Click");
 }

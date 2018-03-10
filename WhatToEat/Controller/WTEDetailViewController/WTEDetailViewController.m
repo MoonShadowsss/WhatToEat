@@ -94,8 +94,9 @@
 }
 
 #pragma mark - Getter & Setter
-- (void)setStoreItemModel:(StoreItemModel *)storeItemModel {
-    _storeItemModel = storeItemModel;
+- (void)setStoreItemViewModel:(StoreItemViewModel *)storeItemViewModel {
+    _storeItemViewModel = storeItemViewModel;
+    StoreItemModel *storeItemModel = storeItemViewModel.model;
     self.nameLabel.text = storeItemModel.name;
     self.locationLabel.text = storeItemModel.location;
     if (storeItemModel.isLike) {
@@ -109,7 +110,24 @@
     } else {
         self.pictureImageView.image = [UIImage imageWithData:pictureData];
     }
+
 }
+//- (void)setStoreItemModel:(StoreItemModel *)storeItemModel {
+//    _storeItemModel = storeItemModel;
+//    self.nameLabel.text = storeItemModel.name;
+//    self.locationLabel.text = storeItemModel.location;
+//    if (storeItemModel.isLike) {
+//        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+//    } else {
+//        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
+//    }
+//    NSData *pictureData = [NSData dataWithContentsOfURL:storeItemModel.pictureURL];
+//    if (pictureData == nil) {
+//        self.pictureImageView.image = [UIImage imageNamed:@"food3"];
+//    } else {
+//        self.pictureImageView.image = [UIImage imageWithData:pictureData];
+//    }
+//}
 
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {

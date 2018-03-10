@@ -57,6 +57,10 @@
     }];
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    
+}
+
 #pragma mark - Button Event
 - (void)likeButtonDidClick:(UIButton *)sender {
     NSLog(@"Click");

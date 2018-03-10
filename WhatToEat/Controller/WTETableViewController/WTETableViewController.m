@@ -62,7 +62,6 @@ static NSString *const segueIdentifier = @"AddViewControllerSegue";
     if ([segue.identifier isEqual:segueIdentifier]) {
         WTEAddViewController *vc = segue.destinationViewController;
         vc.menuId = self.dishModel.menuId;
-        vc.userModel = self.userModel;
     }
 }
 

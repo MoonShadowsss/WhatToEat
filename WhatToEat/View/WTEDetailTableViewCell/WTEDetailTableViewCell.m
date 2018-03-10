@@ -7,6 +7,7 @@
 //
 
 #import "WTEDetailTableViewCell.h"
+#import <Masonry.h>
 @interface WTEDetailTableViewCell()
 
 @property (strong, nonatomic) UIImageView *pictureImageView;
@@ -17,10 +18,33 @@
 @end
 
 @implementation WTEDetailTableViewCell
+#warning set font
 
 - (void)setup {
-    
+    [self addSubview:self.pictureImageView];
+    [self.pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(self.mas_height).multipliedBy(0.68);
+        make.height.equalTo(self.pictureImageView.mas_width);
+        make.centerY.equalTo(self.mas_centerY);
+        make.left.equalTo(self.mas_left).offset(self.frame.size.width * 0.036);
+    }];
+    [self addSubview:self.nameLabel];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top).offset(self.frame.size.height * 0.3);
+        make.left.equalTo(self.mas_left).offset(self.frame.size.width * 0.25);
+    }];
+    [self addSubview:self.priceLabel];
+    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.nameLabel.mas_centerX);
+        make.left.equalTo(self.nameLabel.mas_right);
+    }];
+    [self addSubview:self.informationLabel];
+    [self.informationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom).offset(-self.frame.size.height * 0.3);
+        make.left.equalTo(self.mas_left).offset(self.frame.size.width * 0.25);
+    }];
 }
+
 
 #pragma mark - Getter & Setter
 - (UIImageView *)pictureImageView {

@@ -6,16 +6,14 @@
 //  Copyright © 2018年 翟元浩. All rights reserved.
 //
 
-#import "PickViewModel.h"
+#import "MenusViewModel.h"
 #import "GetMenuAPIManager.h"
 
-NSString * const kNetworkingRACTypeGetMenu = @"kNetworkingRACTypeGetMenu";
-@interface PickViewModel()
+@interface MenusViewModel()
 @property (nonatomic, strong) GetMenuAPIManager *getMenuAPIManager;
-@property (nonatomic, strong) YLNetworkingRACTable *networkingRACs;
 @end
 
-@implementation PickViewModel
+@implementation MenusViewModel
 
 - (instancetype)init {
     self = [super init];
@@ -26,14 +24,17 @@ NSString * const kNetworkingRACTypeGetMenu = @"kNetworkingRACTypeGetMenu";
 }
 
 - (void)setupRAC {
-    
+    @weakify(self);
+    [self.getMenuAPIManager.executionSignal subscribeNext:^(id x) {
+        @strongify(self);
+        NSArray *menuItemModels = [self.getMenuAPIManager fetchDataFromModel:MenuItemModel.class];
+        self.menuItemModels = [menuItemModels copy];
+        self.menuCount = self.menuItemModels.count;
+    }];
 }
-- (YLNetworkingRACTable *)networkingRACs {
-    if (_networkingRACs == nil) {
-        _networkingRACs = [YLNetworkingRACTable strongToWeakObjectsMapTable];
-        _networkingRACs[kNetworkingRACTypeGetMenu] = self.getMenuAPIManager;
-    }
-    return _networkingRACs;
+
+- (id<YLNetworkingRACOperationProtocol>)networkingRAC {
+    return self.getMenuAPIManager;
 }
 
 # pragma mark - Getter & Setter
@@ -46,3 +47,4 @@ NSString * const kNetworkingRACTypeGetMenu = @"kNetworkingRACTypeGetMenu";
 }
 
 @end
+

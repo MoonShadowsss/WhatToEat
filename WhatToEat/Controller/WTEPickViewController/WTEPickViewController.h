@@ -15,6 +15,6 @@
 
 @interface WTEPickViewController : UIViewController
 
-@property (strong, nonatomic) WTEUserModel *userModel;
 
 @end
+

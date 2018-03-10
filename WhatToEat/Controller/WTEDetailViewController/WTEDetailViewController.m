@@ -7,6 +7,7 @@
 //
 
 #import "WTEDetailViewController.h"
+#import <Masonry.h>
 
 @interface WTEDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -17,6 +18,7 @@
 @property (strong, nonatomic) UILabel *locationLabel;
 @property (strong, nonatomic) UILabel *informationLabel;
 @property (strong, nonatomic) UIButton *likeButton;
+@property (strong, nonatomic) UIBarButtonItem *jumpButton;
 
 @end
 
@@ -24,6 +26,62 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blueColor];
+    self.navigationItem.rightBarButtonItem = self.jumpButton;
+    [self.view addSubview:self.scrollView];
+    self.scrollView.frame = self.view.bounds;
+    [self.scrollView addSubview:self.pictureImageView];
+    [self.pictureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(self.view.mas_width).multipliedBy(0.2);
+        make.width.equalTo(self.pictureImageView.mas_height);
+        make.top.equalTo(self.scrollView.mas_top);
+        make.centerX.equalTo(self.scrollView.mas_centerX);
+    }];
+    [self.scrollView addSubview:self.nameLabel];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.pictureImageView.mas_bottom);
+        make.centerX.equalTo(self.scrollView.mas_centerX);
+    }];
+    [self.scrollView addSubview:self.locationLabel];
+    [self.locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.nameLabel.mas_bottom);
+        make.centerX.equalTo(self.scrollView.mas_centerX);
+    }];
+    [self.scrollView addSubview:self.informationLabel];
+    [self.informationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.locationLabel.mas_bottom);
+        make.centerX.equalTo(self.scrollView.mas_centerX);
+    }];
+    [self.scrollView addSubview:self.likeButton];
+    [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.pictureImageView.mas_centerY);
+        make.right.equalTo(self.view.mas_right);
+    }];
+    [self.scrollView addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.informationLabel.mas_bottom);
+        make.left.equalTo(self.scrollView.mas_left);
+        make.right.equalTo(self.scrollView.mas_right);
+    }];
+}
+
+- (void)jumpButtonDidClick:(UIBarButtonItem *)sender {
+    
+}
+
+#pragma mark - TableView Delegate & DataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.backgroundColor = [UIColor whiteColor];
+    return cell;
 }
 
 #pragma mark - Getter & Setter
@@ -81,6 +139,13 @@
         _likeButton.imageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _likeButton;
+}
+
+- (UIBarButtonItem *)jumpButton {
+    if (_jumpButton == nil) {
+        _jumpButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"purchase"] style:UIBarButtonItemStylePlain target:self action:@selector(jumpButtonDidClick:)];
+    }
+    return _jumpButton;
 }
 
 @end

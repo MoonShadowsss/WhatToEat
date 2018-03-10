@@ -1,14 +1,14 @@
 //
-//  StoreModel.m
+//  StoreItemModel.m
 //  WhatToEat
 //
 //  Created by 殷子欣 on 2018/3/10.
 //  Copyright © 2018年 翟元浩. All rights reserved.
 //
 
-#import "StoreModel.h"
+#import "StoreItemModel.h"
 
-@implementation StoreModel
+@implementation StoreItemModel
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{

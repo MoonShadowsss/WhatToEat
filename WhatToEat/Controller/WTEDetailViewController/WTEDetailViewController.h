@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WTEDetailTableViewCell.h"
 
 @interface WTEDetailViewController : UIViewController
 

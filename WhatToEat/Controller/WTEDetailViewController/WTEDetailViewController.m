@@ -37,7 +37,6 @@
         make.width.equalTo(self.view.mas_width);
         make.height.equalTo(self.backgroundImageView.mas_width);
     }];
-    [self.backgroundImageView setImageToBlur:self.pictureImageView.image completionBlock:nil];
     
     [self.view addSubview:self.scrollView];
     self.scrollView.backgroundColor = [UIColor clearColor];
@@ -52,7 +51,6 @@
         make.height.equalTo(self.view.mas_width).multipliedBy(0.2);
         make.width.equalTo(self.pictureImageView.mas_height);
         make.top.equalTo(self.scrollView.mas_top);
-//        make.left.equalTo(self.scrollView.mas_leftMargin);
         make.centerX.equalTo(self.view.mas_centerX);
     }];
     [self.scrollView addSubview:self.likeButton];
@@ -73,16 +71,42 @@
         make.top.equalTo(self.nameLabel.mas_bottom).offset(10);
         make.centerX.equalTo(self.scrollView.mas_centerX);
     }];
+    [self.scrollView addSubview:self.informationLabel];
+    [self.informationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.locationLabel.mas_bottom).offset(10);
+        make.centerX.equalTo(self.scrollView.mas_centerX);
+    }];
     [self.scrollView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.locationLabel.mas_bottom);
+        make.top.equalTo(self.informationLabel.mas_bottom);
         make.left.equalTo(self.scrollView.mas_left);
         make.right.equalTo(self.scrollView.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.scrollView.contentSize = CGSizeMake(0, self.scrollView.frame.size.height + self.tableView.frame.origin.y);
-//    [self setupRAC];
-//    [[self.viewModel.networkingRAC ] execute:nil];
+    [self setupRAC];
+    [[self.viewModel.networkingRAC requestCommand] execute:nil];
+}
+
+- (void)setupRAC {
+    @weakify(self);
+    [[RACObserve(self.viewModel, storeItemViewModel) skip:1] subscribeNext:^(id x) {
+        @strongify(self);
+        self.nameLabel.text = self.viewModel.storeItemViewModel.model.name;
+        self.locationLabel.text = self.viewModel.storeItemViewModel.model.location;
+        self.informationLabel.text = self.viewModel.storeItemViewModel.model.information;
+        NSData *pictureData = [NSData dataWithContentsOfURL:self.viewModel.storeItemViewModel.model.pictureURL];
+        if (pictureData == nil) {
+            self.pictureImageView.image = [UIImage imageNamed:@"food2"];
+        } else {
+            self.pictureImageView.image = [UIImage imageWithData:pictureData];
+        }
+        [self.backgroundImageView setImageToBlur:self.pictureImageView.image completionBlock:nil];
+    }];
+    [[RACObserve(self.viewModel, dishModels) skip:1] subscribeNext:^(id x) {
+        @strongify(self);
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)jumpButtonDidClick:(UIBarButtonItem *)sender {
@@ -95,34 +119,35 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.viewModel.dishModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.backgroundColor = [UIColor whiteColor];
+    WTEDetailTableViewCell *cell = [[WTEDetailTableViewCell alloc] init];
+    cell.dishModel = self.viewModel.dishModels[indexPath.row];
+    [cell setup];
     return cell;
 }
 
 #pragma mark - Getter & Setter
-- (void)setStoreItemViewModel:(StoreItemViewModel *)storeItemViewModel {
-    _storeItemViewModel = storeItemViewModel;
-    StoreItemModel *storeItemModel = storeItemViewModel.model;
-    self.nameLabel.text = storeItemModel.name;
-    self.locationLabel.text = storeItemModel.location;
-    if (storeItemModel.isLike) {
-        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-    } else {
-        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
-    }
-    NSData *pictureData = [NSData dataWithContentsOfURL:storeItemModel.pictureURL];
-    if (pictureData == nil) {
-        self.pictureImageView.image = [UIImage imageNamed:@"food3"];
-    } else {
-        self.pictureImageView.image = [UIImage imageWithData:pictureData];
-    }
-
-}
+//- (void)setStoreItemViewModel:(StoreItemViewModel *)storeItemViewModel {
+//    _storeItemViewModel = storeItemViewModel;
+//    StoreItemModel *storeItemModel = storeItemViewModel.model;
+//    self.nameLabel.text = storeItemModel.name;
+//    self.locationLabel.text = storeItemModel.location;
+//    if (storeItemModel.isLike) {
+//        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+//    } else {
+//        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
+//    }
+//    NSData *pictureData = [NSData dataWithContentsOfURL:storeItemModel.pictureURL];
+//    if (pictureData == nil) {
+//        self.pictureImageView.image = [UIImage imageNamed:@"food3"];
+//    } else {
+//        self.pictureImageView.image = [UIImage imageWithData:pictureData];
+//    }
+//
+//}
 
 - (UIImageView *)backgroundImageView {
     if (_backgroundImageView == nil) {
@@ -196,5 +221,6 @@
     }
     return _jumpButton;
 }
+
 
 @end

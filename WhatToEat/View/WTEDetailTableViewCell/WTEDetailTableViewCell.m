@@ -45,8 +45,21 @@
     }];
 }
 
-
 #pragma mark - Getter & Setter
+- (void)setDishModel:(DishModel *)dishModel {
+    _dishModel = dishModel;
+    self.nameLabel.text = dishModel.name;
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", dishModel.cost];
+    self.informationLabel.text = dishModel.information;
+    NSData *pictureData = [NSData dataWithContentsOfURL:dishModel.pictureURL];
+    if (pictureData == nil) {
+        self.pictureImageView.image = [UIImage imageNamed:@"food3"];
+    } else {
+        self.pictureImageView.image = [UIImage imageWithData:pictureData];
+    }
+}
+
+
 - (UIImageView *)pictureImageView {
     if (_pictureImageView == nil) {
         _pictureImageView = [[UIImageView alloc] init];

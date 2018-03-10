@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "WTEDetailTableViewCell.h"
-#import "StoreItemViewModel.h"
+#import "DetailViewModel.h"
 #import "UIImageView+LBBlurredImage.h"
 
 @interface WTEDetailViewController : UIViewController
 
-@property (strong, nonatomic) StoreItemViewModel *storeItemViewModel;
+@property (strong, nonatomic) DetailViewModel *viewModel;
 
 @end

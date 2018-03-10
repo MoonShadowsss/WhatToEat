@@ -104,7 +104,7 @@ static NSString *const detailViewControllerSegueIdentifier = @"detailViewControl
     } else if ([segue.identifier isEqualToString:detailViewControllerSegueIdentifier]) {
         WTEDetailViewController *vc = segue.destinationViewController;
         NSIndexPath *index = (NSIndexPath *)sender;
-        vc.storeItemViewModel = self.viewModel.storeItemViewModels[index.row];
+        vc.viewModel.storeItemViewModel.model.storeId = self.viewModel.storeItemViewModels[index.row].model.storeId;
     }
 }
 

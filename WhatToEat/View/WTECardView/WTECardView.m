@@ -28,16 +28,17 @@
     NSInteger totalNumberOfItemView = [self numberOfCardItemView];
     self.cardItemViews = [[NSMutableArray alloc] initWithObjects:[[WTECardItemView alloc] init], [[WTECardItemView alloc] init], [[WTECardItemView alloc] init], nil];
     self.visibleCardItemViewCount = 0;
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandle:)];
+    [self addGestureRecognizer:pan];
+    self.firstCardItemViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 180 / 191);
     if (totalNumberOfItemView > 0) {
         self.currentIndex = 0;
         [self setupCardItemViewAtArrayIndex:0 index:0];
-        self.cardItemViews[0].frame =  CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 180 / 191);
+        self.cardItemViews[0].frame = self.firstCardItemViewFrame;
         [self addSubview:self.cardItemViews[0]];
         [self.cardItemViews[0] setup];
         self.firstCardItemViewCenter = self.cardItemViews[0].center;
-        self.firstCardItemViewFrame = self.cardItemViews[0].frame;
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandle:)];
-        [self addGestureRecognizer:pan];
+        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandle:)];
         [self addGestureRecognizer:tap];
         self.visibleCardItemViewCount = 1;
@@ -124,7 +125,6 @@
                                  }];
             }
         }
-        
     }
 }
 

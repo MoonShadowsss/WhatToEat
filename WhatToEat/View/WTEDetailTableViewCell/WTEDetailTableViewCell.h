@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DishModel.h"
 
 @interface WTEDetailTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) DishModel *dishModel;
 
 - (void)setup;
 

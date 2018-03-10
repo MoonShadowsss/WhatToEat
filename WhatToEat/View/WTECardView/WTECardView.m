@@ -15,8 +15,6 @@
 @property (strong, nonatomic) NSMutableArray<WTECardItemView *> *cardItemViews;
 @property (assign, nonatomic) NSInteger visibleCardItemViewCount;
 @property (assign, nonatomic) CGPoint firstCardItemViewCenter;
-@property (assign, nonatomic) CGPoint sencondCardItemViewCenter;
-@property (assign, nonatomic) CGPoint thirdCardItemViewCenter;
 @property (assign, nonatomic) CGRect firstCardItemViewFrame;
 @property (assign, nonatomic) CGRect secondCardItemViewFrame;
 @property (assign, nonatomic) CGRect thirdCardItemViewFrame;
@@ -49,7 +47,6 @@
         self.cardItemViews[1].frame = CGRectMake(self.frame.size.width / 2 - (self.frame.size.width * 22 / 27) / 2, self.frame.size.height - self.frame.size.width * 22 / 27 / (self.frame.size.width) * (self.frame.size.height * 180 / 191) - self.frame.size.height * 180 / 191 * 11 / 360, self.frame.size.width * 22 / 27, self.frame.size.width * 22 / 27 / (self.frame.size.width) * (self.frame.size.height * 180 / 191));
         [self addSubview:self.cardItemViews[1]];
         [self.cardItemViews[1] setup];
-        self.sencondCardItemViewCenter = self.cardItemViews[1].center;
         self.secondCardItemViewFrame = self.cardItemViews[1].frame;
         [self sendSubviewToBack:self.cardItemViews[1]];
         self.cardItemViews[1].userInteractionEnabled = NO;
@@ -60,7 +57,6 @@
         self.cardItemViews[2].frame = CGRectMake(self.frame.size.width / 2 - self.frame.size.width * 17 / 27 / 2, self.frame.size.height - self.frame.size.width * 17 / 27 / (self.frame.size.width) * (self.frame.size.height * 180 / 191), self.frame.size.width * 17 / 27, self.frame.size.width * 17 / 27 / (self.frame.size.width) * (self.frame.size.height * 180 / 191));
         [self addSubview:self.cardItemViews[2]];
         [self.cardItemViews[2] setup];
-        self.thirdCardItemViewCenter = self.cardItemViews[2].center;
         self.thirdCardItemViewFrame = self.cardItemViews[2].frame;
         self.cardItemViews[2].alpha = 0.5;
         self.cardItemViews[2].userInteractionEnabled = NO;
@@ -106,7 +102,7 @@
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      self.cardCoverView.center = self.firstCardItemViewCenter;
-                                     self.cardCoverView.transform = CGAffineTransformMakeRotation(0);
+                                     self.cardCoverView.transform = CGAffineTransformIdentity;
                                  }
                                  completion:^(BOOL finished) {
                                      self.userInteractionEnabled = YES;
@@ -120,7 +116,7 @@
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      self.cardItemViews[0].center = self.firstCardItemViewCenter;
-                                     self.cardItemViews[0].transform = CGAffineTransformMakeRotation(0);
+                                     self.cardItemViews[0].transform = CGAffineTransformIdentity;g
                                  }
                                  completion:^(BOOL finished) {
                                      self.userInteractionEnabled = YES;

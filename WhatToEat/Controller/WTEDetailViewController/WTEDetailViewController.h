@@ -12,7 +12,6 @@
 
 @interface WTEDetailViewController : UIViewController
 
-//@property (strong, nonatomic) StoreItemModel *storeItemModel;
 @property (strong, nonatomic) StoreItemViewModel *storeItemViewModel;
 
 @end

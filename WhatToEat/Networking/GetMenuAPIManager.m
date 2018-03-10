@@ -26,6 +26,8 @@
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
     resultParams[@"longitude"] = [WTELocation sharedLocation].longitude;
     resultParams[@"latitude"] = [WTELocation sharedLocation].latitude;
+    resultParams[@"user_name"] = @"test";
+    resultParams[@"user_pwd"] = @"test";
     return resultParams;
 }
 

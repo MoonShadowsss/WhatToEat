@@ -28,6 +28,8 @@ NSString * const kRandomStoreAPIManagerParamsKeyMenuId = @"kRandomStoreAPIManage
     resultParams[@"latitude"] = [WTELocation sharedLocation].latitude;
     resultParams[@"menu_id"] = params[kRandomStoreAPIManagerParamsKeyMenuId];
     resultParams[@"page_size"] = @5;
+    resultParams[@"user_name"] = @"test";
+    resultParams[@"user_pwd"] = @"test";
     return resultParams;
 }
 

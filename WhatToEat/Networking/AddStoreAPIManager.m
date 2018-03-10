@@ -27,6 +27,8 @@ NSString * const kAddStoreAPIManagerParamsKeyStoreId = @"kAddStoreAPIManagerPara
     resultParams[@"longitude"] = [WTELocation sharedLocation].longitude;
     resultParams[@"latitude"] = [WTELocation sharedLocation].latitude;
     resultParams[@"store_id"] = params[kAddStoreAPIManagerParamsKeyStoreId];
+    resultParams[@"user_name"] = @"test";
+    resultParams[@"user_pwd"] = @"test";
     return resultParams;
 }
 

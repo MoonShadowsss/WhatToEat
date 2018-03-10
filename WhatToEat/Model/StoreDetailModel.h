@@ -12,6 +12,12 @@
 #import "DishModel.h"
 
 @interface StoreDetailModel : MTLModel<MTLJSONSerializing>
-@property (strong, nonatomic) StoreItemModel *storeItemModel;
+@property (copy, nonatomic) NSString *name;
+@property (copy, nonatomic) NSString *location;
+@property (copy, nonatomic) NSString *storeId;
+@property (strong, nonatomic) NSURL *pictureURL;
+@property (copy, nonatomic) NSString *information;
+@property (strong, nonatomic) NSURL *buyURL;
+@property (assign, nonatomic) BOOL isLike;
 @property (copy, nonatomic) NSArray<DishModel *> *dishModels;
 @end

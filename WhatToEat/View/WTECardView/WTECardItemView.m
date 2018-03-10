@@ -41,7 +41,7 @@
     [self.cardView addSubview:self.placeLabel];
     [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.cardView.mas_bottom).offset(-self.cardView.frame.size.height * 0.058);
-        make.height.width.equalTo(self.cardView.mas_height).multipliedBy(0.044);
+        make.height.width.equalTo(self.cardView.mas_height).multipliedBy(0.06);
         make.centerX.equalTo(self.cardView.mas_centerX);
     }];
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -53,18 +53,24 @@
     self.nameLabel.font = [UIFont fontWithName:@"Helvetica" size:self.cardView.frame.size.height / 15];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.cardView.mas_top).offset(self.cardView.frame.size.height * 0.645);
+        make.width.equalTo(self.cardView.mas_width).offset(-20);
         make.centerX.equalTo(self.cardView.mas_centerX);
     }];
-    self.placeLabel.font = [UIFont fontWithName:@"Helvetica" size:self.cardView.frame.size.height / 20];
+    self.placeLabel.font = [UIFont fontWithName:@"Helvetica" size:self.cardView.frame.size.height / 23];
     [self.placeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.cardView.mas_top).offset(self.cardView.frame.size.height * 0.784);
+        make.width.equalTo(self.cardView.mas_width).offset(-20);
         make.centerX.equalTo(self.cardView.mas_centerX);
     }];
 }
 
 #pragma mark - Button Event
 - (void)likeButtonDidClick:(UIButton *)sender {
-    
+    if (self.isLike) {
+        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
+    } else {
+        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    }
 #warning POST未写
     self.isLike = !self.isLike;
 }
@@ -108,6 +114,8 @@
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.textColor = [UIColor colorWithRed:0 green:17.0f / 255.0f blue:26.0f / 255.0f alpha:1];
         _nameLabel.text = @"nameLabel";
+        _nameLabel.textAlignment = NSTextAlignmentCenter;
+        _nameLabel.adjustsFontSizeToFitWidth = YES;
     }
     return _nameLabel;
 }
@@ -117,6 +125,7 @@
         _placeLabel = [[UILabel alloc] init];
         _placeLabel.textAlignment = NSTextAlignmentCenter;
         _placeLabel.textColor = [UIColor colorWithRed:0 green:17.0f / 255.0f blue:26.0f / 255.0f alpha:1];
+        _placeLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _placeLabel.text = @"placeLabel";
     }
     return _placeLabel;

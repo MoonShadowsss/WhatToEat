@@ -113,8 +113,7 @@
                 self.userInteractionEnabled = NO;
                 [UIView animateWithDuration:0.2
                                  animations:^{
-                                     self.cardCoverView.center = self.firstCardItemViewCenter;
-                                     self.cardCoverView.transform = CGAffineTransformIdentity;
+                                     self.cardCoverView.transform = CGAffineTransformMakeScale(1.2, 1.2);
                                  }
                                  completion:^(BOOL finished) {
                                      self.cardCoverView.frame = self.firstCardItemViewFrame;

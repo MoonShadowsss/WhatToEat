@@ -56,12 +56,13 @@
     [self.locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.mas_bottom).offset(-self.frame.size.height * 0.3);
         make.left.equalTo(self.mas_left).offset(self.frame.size.width * 0.25);
+        make.right.equalTo(self.mas_right).offset(-20);
     }];
     [self addSubview:self.likeButton];
     [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.width.equalTo(self.mas_height).multipliedBy(0.267);
         make.left.equalTo(self.mas_left).offset(self.frame.size.width * 0.95);
-        make.centerY.equalTo(self.mas_centerY);
+        make.centerY.equalTo(self.mas_centerY).offset(-5);
     }];
 }
 
@@ -87,6 +88,12 @@
 #pragma mark - Button Event
 - (void)likeButtonDidClick:(UIButton *)sender {
     NSLog(@"Click");
+    if (self.isLike) {
+        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
+    } else {
+        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    }
+    self.isLike = !self.isLike;
 #warning POST method
 }
 
@@ -133,6 +140,7 @@
         _locationLabel.textAlignment = NSTextAlignmentLeft;
         _locationLabel.textColor = [UIColor colorWithRed:0 green:17.0f / 255.0f blue:26.0f / 255.0f alpha:0.72];
         _locationLabel.text = @"locationLabel";
+        _locationLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     }
     return _locationLabel;
 }

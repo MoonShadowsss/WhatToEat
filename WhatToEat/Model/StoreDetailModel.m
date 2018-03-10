@@ -12,12 +12,6 @@
 #import "StoreDetailModel.h"
 
 @interface StoreDetailModel()
-@property (copy, nonatomic) NSString *name;
-@property (copy, nonatomic) NSString *location;
-@property (strong, nonatomic) NSURL *pictureURL;
-@property (copy, nonatomic) NSString *information;
-@property (strong, nonatomic) NSURL *buyURL;
-@property (assign, nonatomic) BOOL isLike;
 @end
 
 @implementation StoreDetailModel
@@ -27,6 +21,7 @@
              @"location":@"store_location",
              @"pictureURL":@"store_image",
              @"information":@"store_info",
+             @"storeId":@"store_id",
              @"buyURL":@"url",
              @"isLike":@"is_like",
              @"dishModels":@"dish_list",
@@ -45,16 +40,4 @@
     }];
 }
 
-- (StoreItemModel *)storeItemModel {
-    if (_storeItemModel == nil) {
-        _storeItemModel = [[StoreItemModel alloc] init];
-    }
-    _storeItemModel.name = self.name;
-    _storeItemModel.location = self.location;
-    _storeItemModel.information = self.information;
-    _storeItemModel.pictureURL = self.pictureURL;
-    _storeItemModel.buyURL = self.buyURL;
-    _storeItemModel.isLike = self.isLike;
-    return _storeItemModel;
-}
 @end

@@ -94,8 +94,9 @@
 }
 
 #pragma mark - Getter & Setter
-- (void)setStoreItemModel:(StoreItemModel *)storeItemModel {
-    _storeItemModel = storeItemModel;
+- (void)setStoreItemViewModel:(StoreItemViewModel *)storeItemViewModel {
+    _storeItemViewModel = storeItemViewModel;
+    StoreItemModel *storeItemModel = storeItemViewModel.model;
     self.nameLabel.text = storeItemModel.name;
     self.locationLabel.text = storeItemModel.location;
     if (storeItemModel.isLike) {

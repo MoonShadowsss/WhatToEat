@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WTECardItemView.h"
 #import "WTECardCoverView.h"
+#import "StoresViewModel.h"
 
 @class WTECardView;
 
@@ -21,6 +22,7 @@
 - (NSString *)cardView:(WTECardView *)cardView locationAtIndex:(NSInteger)index;
 - (NSString *)cardView:(WTECardView *)cardView dishIdAtIndex:(NSInteger)index;
 - (BOOL)cardView:(WTECardView *)cardView likeAtIndex:(NSInteger)index;
+- (StoreItemViewModel *)cardView:(WTECardView *)cardView viewModelAtIndex:(NSInteger)index;
 
 @optional
 - (void)cardViewNeedsMoreData:(WTECardView *)cardView;

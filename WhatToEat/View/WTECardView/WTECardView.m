@@ -76,6 +76,7 @@
     self.cardItemViews[arrayIndex].placeLabel.text = [self placeAtIndex:index];
     self.cardItemViews[arrayIndex].isLike = [self likeAtIndex:index];
     self.cardItemViews[arrayIndex].dishId = [self dishIdAtIndex:index];
+    self.cardItemViews[arrayIndex].viewModel = [self viewModelAtIndex:index];
 }
 
 #pragma mark - Gesture event
@@ -222,6 +223,10 @@
 #pragma mark - Data Source
 - (UIImage *)coverImage {
     return [self.dataSource coverImageForCardView:self];
+}
+
+- (StoreItemViewModel *)viewModelAtIndex:(NSInteger)index{
+    return [self.dataSource cardView:self viewModelAtIndex:index];
 }
 
 - (NSString *)dishIdAtIndex:(NSInteger)index {

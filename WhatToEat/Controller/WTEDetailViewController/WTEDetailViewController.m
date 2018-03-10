@@ -12,6 +12,7 @@
 @interface WTEDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *backgroundImageView;
 @property (strong, nonatomic) UIImageView *pictureImageView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UILabel *nameLabel;
@@ -29,8 +30,17 @@
     self.view.backgroundColor = [UIColor colorWithRed:35.0f / 255.0f green:173.0f / 255.0f blue:229.0f / 255.0f alpha:1];
     self.navigationItem.rightBarButtonItem = self.jumpButton;
     
+    [self.view addSubview:self.backgroundImageView];
+    [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.equalTo(self.view.mas_width);
+        make.height.equalTo(self.backgroundImageView.mas_width);
+    }];
+    [self.backgroundImageView setImageToBlur:self.pictureImageView.image completionBlock:nil];
+    
     [self.view addSubview:self.scrollView];
-    self.scrollView.backgroundColor = [UIColor yellowColor];
+    self.scrollView.backgroundColor = [UIColor clearColor];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(64);
         make.left.equalTo(self.view.mas_left);
@@ -110,6 +120,14 @@
         self.pictureImageView.image = [UIImage imageWithData:pictureData];
     }
 
+}
+
+- (UIImageView *)backgroundImageView {
+    if (_backgroundImageView == nil) {
+        _backgroundImageView = [[UIImageView alloc] init];
+        _backgroundImageView.contentMode = UIViewContentModeScaleToFill;
+    }
+    return _backgroundImageView;
 }
 
 - (UIScrollView *)scrollView {

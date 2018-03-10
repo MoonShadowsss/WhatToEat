@@ -116,7 +116,7 @@
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      self.cardItemViews[0].center = self.firstCardItemViewCenter;
-                                     self.cardItemViews[0].transform = CGAffineTransformIdentity;g
+                                     self.cardItemViews[0].transform = CGAffineTransformIdentity;
                                  }
                                  completion:^(BOOL finished) {
                                      self.userInteractionEnabled = YES;

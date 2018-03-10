@@ -102,11 +102,6 @@
     } else {
         self.pictureImageView.image = [UIImage imageWithData:pictureData];
     }
-//    @property (copy, nonatomic) NSString *name;
-//    @property (copy, nonatomic) NSString *location;
-//    @property (copy, nonatomic) NSString *storeId;
-//    @property (strong, nonatomic) NSURL *pictureURL;
-//    @property (assign, nonatomic) BOOL isLike;
 }
 
 - (UIScrollView *)scrollView {

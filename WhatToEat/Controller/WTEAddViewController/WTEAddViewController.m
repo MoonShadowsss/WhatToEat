@@ -61,6 +61,11 @@
         NSURLSessionTask *task = [session dataTaskWithRequest:request];
         [task resume];
         [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请填写名称与地址" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -87,7 +92,7 @@
 
 - (UIBarButtonItem *)doneButton {
     if (_doneButton == nil) {
-        _doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonDidClick:)];
+        _doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonDidClick:)];
     }
     return _doneButton;
 }

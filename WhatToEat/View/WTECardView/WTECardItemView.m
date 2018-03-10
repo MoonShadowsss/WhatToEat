@@ -73,6 +73,7 @@
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
+    self.layer.cornerRadius = frame.size.height / 30;
     self.nameLabel.font = [UIFont fontWithName:@"Helvetica" size:frame.size.height / 15];
     self.placeLabel.font = [UIFont fontWithName:@"Helvetica" size:frame.size.height / 20];
     if ([[self.cardView subviews] containsObject:self.nameLabel]) {

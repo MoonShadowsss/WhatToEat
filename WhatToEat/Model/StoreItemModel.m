@@ -14,7 +14,7 @@
     return @{
              @"name":@"store_name",
              @"location":@"store_location",
-             @"pictureURL":@"store_picture",
+             @"pictureURL":@"store_image",
              @"storeId":@"store_id",
              @"isLike":@"is_like",
              @"information":@"store_info",

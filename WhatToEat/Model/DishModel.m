@@ -9,5 +9,18 @@
 #import "DishModel.h"
 
 @implementation DishModel
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"name":@"dish_name",
+             @"location":@"dish_cost",
+             @"pictureURL":@"dish_picture",
+             @"information":@"dish_info",
+             };
+}
 
++ (NSValueTransformer *)pictureURLJSONTransformer {
+    return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+        return [NSURL URLWithString:value];
+    }];
+}
 @end

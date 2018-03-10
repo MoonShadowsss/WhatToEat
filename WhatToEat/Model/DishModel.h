@@ -8,8 +8,10 @@
 
 #import "MTLModel.h"
 #import <Mantle.h>
-#import "StoreItemModel.h"
 
 @interface DishModel : MTLModel<MTLJSONSerializing>
-@property (strong, nonatomic) StoreItemModel *storeItemModel;
+@property (copy, nonatomic) NSString *name;
+@property (copy, nonatomic) NSString *cost;
+@property (strong, nonatomic) NSURL *pictureURL;
+@property (copy, nonatomic) NSString *information;
 @end

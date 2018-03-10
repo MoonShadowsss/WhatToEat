@@ -25,6 +25,8 @@ NSString * const kGetStoreDetailAPIManagerParamsKeyStoreId = @"kGetStoreDetailAP
 - (NSDictionary *)reformParams:(NSDictionary *)params {
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
     resultParams[@"store_id"] = params[kGetStoreDetailAPIManagerParamsKeyStoreId];
+    resultParams[@"longitude"] = [WTELocation sharedLocation].longitude;
+    resultParams[@"latitude"] = [WTELocation sharedLocation].latitude;
     return resultParams;
 }
 

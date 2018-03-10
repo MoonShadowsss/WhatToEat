@@ -73,6 +73,8 @@
 		8880594C20539DF600BC630F /* WTEDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880594B20539DF600BC630F /* WTEDetailTableViewCell.m */; };
 		888059592054031C00BC630F /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 888059552054031B00BC630F /* UIImageView+LBBlurredImage.m */; };
 		8880595A2054031C00BC630F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 888059572054031C00BC630F /* UIImage+ImageEffects.m */; };
+		8880595C20540A9800BC630F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8880595B20540A9700BC630F /* CoreLocation.framework */; };
+		8880596020540BC200BC630F /* WTELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880595F20540BC200BC630F /* WTELocation.m */; };
 		888140A2203EB4B7003F9743 /* WTETableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 888140A1203EB4B7003F9743 /* WTETableViewController.m */; };
 		888140A5203EB5DB003F9743 /* WTETableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888140A4203EB5DB003F9743 /* WTETableViewCell.m */; };
 		889806C820159286004F1704 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 889806C720159286004F1704 /* AppDelegate.m */; };
@@ -228,6 +230,9 @@
 		888059562054031B00BC630F /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
 		888059572054031C00BC630F /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		888059582054031C00BC630F /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		8880595B20540A9700BC630F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8880595E20540BC200BC630F /* WTELocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTELocation.h; sourceTree = "<group>"; };
+		8880595F20540BC200BC630F /* WTELocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTELocation.m; sourceTree = "<group>"; };
 		888140A0203EB4B7003F9743 /* WTETableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTETableViewController.h; sourceTree = "<group>"; };
 		888140A1203EB4B7003F9743 /* WTETableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTETableViewController.m; sourceTree = "<group>"; };
 		888140A3203EB5DB003F9743 /* WTETableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTETableViewCell.h; sourceTree = "<group>"; };
@@ -255,6 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8880595C20540A9800BC630F /* CoreLocation.framework in Frameworks */,
 				489DA7DB5E532BB8C6E26637 /* libPods-WhatToEat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +284,7 @@
 		658EE89E2053819600E32680 /* LKBaseModule */ = {
 			isa = PBXGroup;
 			children = (
+				8880595D20540B9A00BC630F /* WTELocationManager */,
 				658EE89F2053819600E32680 /* LKToolsModule */,
 				658EE8AD2053819600E32680 /* MJRefresh */,
 				658EE8DC2053819600E32680 /* NetworkingModule */,
@@ -590,6 +597,15 @@
 			path = WTEBlurImagView;
 			sourceTree = "<group>";
 		};
+		8880595D20540B9A00BC630F /* WTELocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				8880595E20540BC200BC630F /* WTELocation.h */,
+				8880595F20540BC200BC630F /* WTELocation.m */,
+			);
+			path = WTELocationManager;
+			sourceTree = "<group>";
+		};
 		8881409B203E88EB003F9743 /* WTETableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,8 +674,8 @@
 		889806DD20159299004F1704 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				88805954205402FB00BC630F /* WTEBlurImagView */,
 				889806CC20159286004F1704 /* Main.storyboard */,
+				88805954205402FB00BC630F /* WTEBlurImagView */,
 				8880594920539DE000BC630F /* WTEDetailTableViewCell */,
 				8881409F203E8936003F9743 /* WTETableViewCell */,
 				88D1638C201B2C3D00F2143B /* WTECollectionView */,
@@ -728,6 +744,7 @@
 		B2D9DAB58F7F2C5B93DAE919 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8880595B20540A9700BC630F /* CoreLocation.framework */,
 				0988F3D2841D378EC387416D /* libPods-WhatToEat.a */,
 			);
 			name = Frameworks;
@@ -949,6 +966,7 @@
 				658EE90F2053819600E32680 /* NSDictionary+LKValueGetter.m in Sources */,
 				658EE9292053819600E32680 /* YLNetworking+ReactiveExtension.m in Sources */,
 				88B1E955201B756700398D24 /* WTECollectionViewLayout.m in Sources */,
+				8880596020540BC200BC630F /* WTELocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

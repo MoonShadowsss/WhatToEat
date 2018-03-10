@@ -24,10 +24,14 @@
 
 - (NSDictionary *)reformParams:(NSDictionary *)params {
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
+    resultParams[@"longitude"] = [WTELocation sharedLocation].longitude;
+    resultParams[@"latitude"] = [WTELocation sharedLocation].latitude;
     return resultParams;
 }
 
 - (NSString *)keyOfResult {
     return @"menu_list";
 }
+
+
 @end

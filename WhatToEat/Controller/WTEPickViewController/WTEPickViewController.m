@@ -9,15 +9,17 @@
 
 #import "WTEPickViewController.h"
 #import "PickViewModel.h"
+#import <CoreLocation/CoreLocation.h>
 
 static NSString *const tableViewControllerSegueIdentifier = @"tableViewControllerSegue";
 static NSString *const detailViewControllerSegueIdentifier = @"detailViewControllerSegue";
 static NSString *const cellIdentifier = @"cellId";
-@interface WTEPickViewController () <UICollectionViewDataSource, UICollectionViewDelegate, WTECollectionViewCellDelegate>
+@interface WTEPickViewController () <UICollectionViewDataSource, UICollectionViewDelegate, WTECollectionViewCellDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) PickViewModel *viewModel;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -36,7 +38,8 @@ static NSString *const cellIdentifier = @"cellId";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     [self setupRAC];
-    [[self.viewModel.networkingRAC refreshCommand] execute:nil];
+    [self updateLocation];
+    
     WTECollectionViewLayout *layout = [[WTECollectionViewLayout alloc] init];
     layout.itemSize = CGSizeMake(self.view.frame.size.width * 0.69, self.view.frame.size.height * 0.75);
     layout.spacing = self.view.frame.size.width * 0.095;
@@ -50,6 +53,27 @@ static NSString *const cellIdentifier = @"cellId";
     
     self.pageControl.frame = CGRectMake(0, self.view.frame.size.height * 0.94, self.view.frame.size.width, self.view.frame.size.height * 0.06);
     [self.view addSubview:self.pageControl];
+    
+    
+}
+
+- (void)updateLocation {
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        [self.locationManager requestAlwaysAuthorization];
+        [self.locationManager requestWhenInUseAuthorization];
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [self.locationManager startUpdatingLocation];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocation *currentLocation = [locations lastObject];
+    WTELocation *location = [WTELocation sharedLocation];
+    location.longitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude];
+    location.latitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude];
+    [[self.viewModel.networkingRAC refreshCommand] execute:nil];
 }
 
 - (void)setupRAC {

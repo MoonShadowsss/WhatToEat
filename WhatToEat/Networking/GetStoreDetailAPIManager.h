@@ -7,6 +7,7 @@
 //
 
 #import "YLBaseAPIManager.h"
+#import "WTELocation.h"
 
 extern NSString * const kGetStoreDetailAPIManagerParamsKeyStoreId;
 @interface GetStoreDetailAPIManager : YLBaseAPIManager<YLAPIManager>

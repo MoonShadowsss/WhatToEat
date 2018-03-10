@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LKNetworking.h"
 #import "StoreDetailModel.h"
 #import "StoreItemViewModel.h"
 
-@interface DetailViewModel : NSObject
+@interface DetailViewModel : NSObject<YLNetworkingRACProtocol>
 @property (strong, nonatomic) StoreItemViewModel *storeItemViewModel;
 @property (copy, nonatomic) NSArray<DishModel *> *dishModels;
 

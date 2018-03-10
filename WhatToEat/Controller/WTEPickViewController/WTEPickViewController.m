@@ -64,7 +64,7 @@ static NSString *const cellIdentifier = @"cellId";
             StoresViewModel *storesViewModel = [[StoresViewModel alloc] init];
             storesViewModel.menuId = item.menuId;
             [[storesViewModel.networkingRAC refreshCommand] execute:nil];
-            [[RACObserve(storesViewModel, storeItemModels) skip:1] subscribeNext:^(id x) {
+            [[RACObserve(storesViewModel, storeItemViewModels) skip:1] subscribeNext:^(id x) {
                 [self.storesViewModels addObject:storesViewModel];
                 if ([item.menuId isEqualToString:self.menusViewModel.menuItemModels[self.menusViewModel.menuCount - 1].menuId]) {
                     if ([NSThread isMainThread]) {

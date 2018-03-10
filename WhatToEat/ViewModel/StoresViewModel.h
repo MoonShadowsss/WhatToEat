@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "LKNetworking.h"
-#import "StoreItemModel.h"
+#import "StoreItemViewModel.h"
 
 @interface StoresViewModel : NSObject <YLNetworkingListRACProtocol>
 @property (assign, nonatomic) NSInteger storeCount;
-@property (nonatomic, copy) NSArray<StoreItemModel *> *storeItemModels;
+@property (nonatomic, copy) NSArray<StoreItemViewModel *> *storeItemViewModels;
 @property (nonatomic, copy) NSString *menuId;
 @end

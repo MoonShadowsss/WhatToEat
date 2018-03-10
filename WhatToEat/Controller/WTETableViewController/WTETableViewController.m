@@ -48,7 +48,7 @@ static NSString *const detailViewControllerSegueIdentifier = @"detailViewControl
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WTETableViewCell *cell = [[WTETableViewCell alloc] init];
-    cell.storeItemModel = self.viewModel.storeItemModels[indexPath.row];
+    cell.storeItemViewModel = self.viewModel.storeItemViewModels[indexPath.row];
     [cell setup];
     return cell;
 }

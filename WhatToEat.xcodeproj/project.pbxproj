@@ -10,6 +10,8 @@
 		489DA7DB5E532BB8C6E26637 /* libPods-WhatToEat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0988F3D2841D378EC387416D /* libPods-WhatToEat.a */; };
 		6535F8B92053A720006545A2 /* StoresViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535F8B82053A720006545A2 /* StoresViewModel.m */; };
 		6535F8BC2053A832006545A2 /* RandomStoreAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6535F8BB2053A832006545A2 /* RandomStoreAPIManager.m */; };
+		65575B1E2053D3DF00D94DD7 /* AddStoreAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65575B1D2053D3DF00D94DD7 /* AddStoreAPIManager.m */; };
+		65575B212053D43600D94DD7 /* StoreItemViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65575B202053D43600D94DD7 /* StoreItemViewModel.m */; };
 		658EE90C2053819600E32680 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 658EE8A42053819600E32680 /* NSString+Base64.m */; };
 		658EE90D2053819600E32680 /* LKTranscoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 658EE8A82053819600E32680 /* LKTranscoder.m */; };
 		658EE90E2053819600E32680 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 658EE8A92053819600E32680 /* NSData+Base64.m */; };
@@ -87,6 +89,10 @@
 		6535F8B82053A720006545A2 /* StoresViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoresViewModel.m; sourceTree = "<group>"; };
 		6535F8BA2053A832006545A2 /* RandomStoreAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RandomStoreAPIManager.h; sourceTree = "<group>"; };
 		6535F8BB2053A832006545A2 /* RandomStoreAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RandomStoreAPIManager.m; sourceTree = "<group>"; };
+		65575B1C2053D3DF00D94DD7 /* AddStoreAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddStoreAPIManager.h; sourceTree = "<group>"; };
+		65575B1D2053D3DF00D94DD7 /* AddStoreAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStoreAPIManager.m; sourceTree = "<group>"; };
+		65575B1F2053D43600D94DD7 /* StoreItemViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreItemViewModel.h; sourceTree = "<group>"; };
+		65575B202053D43600D94DD7 /* StoreItemViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreItemViewModel.m; sourceTree = "<group>"; };
 		658EE8A02053819600E32680 /* NSDictionary+LKValueGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+LKValueGetter.h"; sourceTree = "<group>"; };
 		658EE8A12053819600E32680 /* Foundation+LKTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Foundation+LKTools.h"; sourceTree = "<group>"; };
 		658EE8A22053819600E32680 /* UITableViewCell+LKTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+LKTools.h"; sourceTree = "<group>"; };
@@ -485,6 +491,8 @@
 				6535F8B82053A720006545A2 /* StoresViewModel.m */,
 				658EE94D20538FEF00E32680 /* DetailViewModel.h */,
 				658EE94E20538FEF00E32680 /* DetailViewModel.m */,
+				65575B1F2053D43600D94DD7 /* StoreItemViewModel.h */,
+				65575B202053D43600D94DD7 /* StoreItemViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -496,6 +504,8 @@
 				658EE94B20538C4C00E32680 /* GetMenuAPIManager.m */,
 				6535F8BA2053A832006545A2 /* RandomStoreAPIManager.h */,
 				6535F8BB2053A832006545A2 /* RandomStoreAPIManager.m */,
+				65575B1C2053D3DF00D94DD7 /* AddStoreAPIManager.h */,
+				65575B1D2053D3DF00D94DD7 /* AddStoreAPIManager.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -872,10 +882,12 @@
 				658EE9202053819600E32680 /* MJRefreshGifHeader.m in Sources */,
 				658EE92D2053819700E32680 /* MJRefresh+ReactiveExtension.m in Sources */,
 				658EE9262053819600E32680 /* YLNetworkingLogger.m in Sources */,
+				65575B212053D43600D94DD7 /* StoreItemViewModel.m in Sources */,
 				658EE9232053819600E32680 /* MJRefreshBackFooter.m in Sources */,
 				658EE92E2053819700E32680 /* YLSignatureGenerator.m in Sources */,
 				658EE94C20538C4C00E32680 /* GetMenuAPIManager.m in Sources */,
 				888140A2203EB4B7003F9743 /* WTETableViewController.m in Sources */,
+				65575B1E2053D3DF00D94DD7 /* AddStoreAPIManager.m in Sources */,
 				658EE92C2053819700E32680 /* NSMapTable+YLNetworking.m in Sources */,
 				658EE9482053892900E32680 /* StoreItemModel.m in Sources */,
 				658EE91C2053819600E32680 /* MJRefreshAutoGifFooter.m in Sources */,

@@ -42,7 +42,7 @@
 
 #pragma mark - Delegate & DataSource
 - (UIImage *)cardView:(WTECardView *)cardView imageAtIndex:(NSInteger)index {
-    NSData *pictureData = [NSData dataWithContentsOfURL:self.viewModel.storeItemModels[index].pictureURL];
+    NSData *pictureData = [NSData dataWithContentsOfURL:self.viewModel.storeItemViewModels[index].model.pictureURL];
     if (pictureData != nil) {
         UIImage *picture = [UIImage imageWithData:pictureData];
         return picture;
@@ -52,15 +52,15 @@
 }
 
 - (BOOL)cardView:(WTECardView *)cardView likeAtIndex:(NSInteger)index {
-    return self.viewModel.storeItemModels[index].isLike;
+    return self.viewModel.storeItemViewModels[index].model.isLike;
 }
 
 - (NSString *)cardView:(WTECardView *)cardView nameAtIndex:(NSInteger)index {
-    return self.viewModel.storeItemModels[index].name;
+    return self.viewModel.storeItemViewModels[index].model.name;
 }
 
 - (NSString *)cardView:(WTECardView *)cardView locationAtIndex:(NSInteger)index {
-    return self.viewModel.storeItemModels[index].location;
+    return self.viewModel.storeItemViewModels[index].model.location;
 }
 
 - (NSInteger)numberOfCardItemViewInCardView:(WTECardView *)cardView {
@@ -68,7 +68,7 @@
 }
 
 - (NSString *)cardView:(WTECardView *)cardView dishIdAtIndex:(NSInteger)index {
-    return self.viewModel.storeItemModels[index].storeId;
+    return self.viewModel.storeItemViewModels[index].model.storeId;
 }
 
 - (void)likeButtonDidClick:(WTECardItemView *)cardItemView {

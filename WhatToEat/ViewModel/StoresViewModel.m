@@ -28,8 +28,14 @@
     [self.randomStoreAPIManager.executionSignal subscribeNext:^(id x) {
         @strongify(self);
         NSArray *storeItemModels = [self.randomStoreAPIManager fetchDataFromModel:StoreItemModel.class];
-        self.storeItemModels = [storeItemModels copy];
-        self.storeCount = self.storeItemModels.count;
+        NSMutableArray *storeItemViewModels = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < storeItemModels.count; i++) {
+            StoreItemViewModel *viewModel = [[StoreItemViewModel alloc] init];
+            viewModel.model = storeItemModels[i];
+            [storeItemViewModels addObject:viewModel];
+        }
+        self.storeItemViewModels = [storeItemViewModels copy];
+        self.storeCount = self.storeItemViewModels.count;
     }];
 }
 

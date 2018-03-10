@@ -81,6 +81,8 @@
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.scrollView.contentSize = CGSizeMake(0, self.scrollView.frame.size.height + self.tableView.frame.origin.y);
+//    [self setupRAC];
+//    [[self.viewModel.networkingRAC ] execute:nil];
 }
 
 - (void)jumpButtonDidClick:(UIBarButtonItem *)sender {

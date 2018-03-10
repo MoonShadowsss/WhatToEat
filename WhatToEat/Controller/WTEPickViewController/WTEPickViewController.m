@@ -74,6 +74,7 @@ static NSString *const cellIdentifier = @"cellId";
     location.longitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude];
     location.latitude = [NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude];
     [[self.viewModel.networkingRAC refreshCommand] execute:nil];
+    [self.locationManager stopUpdatingLocation];
 }
 
 - (void)setupRAC {

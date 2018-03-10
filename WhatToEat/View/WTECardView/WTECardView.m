@@ -28,17 +28,16 @@
     NSInteger totalNumberOfItemView = [self numberOfCardItemView];
     self.cardItemViews = [[NSMutableArray alloc] initWithObjects:[[WTECardItemView alloc] init], [[WTECardItemView alloc] init], [[WTECardItemView alloc] init], nil];
     self.visibleCardItemViewCount = 0;
+    self.firstCardItemViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 180 / 191);
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandle:)];
     [self addGestureRecognizer:pan];
-    self.firstCardItemViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 180 / 191);
     if (totalNumberOfItemView > 0) {
         self.currentIndex = 0;
         [self setupCardItemViewAtArrayIndex:0 index:0];
-        self.cardItemViews[0].frame = self.firstCardItemViewFrame;
+        self.cardItemViews[0].frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 180 / 191);
         [self addSubview:self.cardItemViews[0]];
         [self.cardItemViews[0] setup];
         self.firstCardItemViewCenter = self.cardItemViews[0].center;
-        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureHandle:)];
         [self addGestureRecognizer:tap];
         self.visibleCardItemViewCount = 1;
@@ -67,7 +66,7 @@
     
     [self addSubview:self.cardCoverView];
     self.cardCoverView.imageView.image = [self coverImage];
-    self.cardCoverView.frame = self.firstCardItemViewFrame;
+    self.cardCoverView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 180 / 191);
     [self.cardCoverView setup];
 }
 

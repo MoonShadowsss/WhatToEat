@@ -60,6 +60,8 @@
 		882980D42015D81B009005EA /* WTECardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 882980D32015D81B009005EA /* WTECardView.m */; };
 		885648502045870D00B2BB4F /* WTECardCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8856484F2045870D00B2BB4F /* WTECardCoverView.m */; };
 		887BC2DF204693F500FC46D8 /* WTEAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887BC2DE204693F500FC46D8 /* WTEAddViewController.m */; };
+		8880594820539DDA00BC630F /* WTEDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880594720539DDA00BC630F /* WTEDetailViewController.m */; };
+		8880594C20539DF600BC630F /* WTEDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8880594B20539DF600BC630F /* WTEDetailTableViewCell.m */; };
 		888140A2203EB4B7003F9743 /* WTETableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 888140A1203EB4B7003F9743 /* WTETableViewController.m */; };
 		888140A5203EB5DB003F9743 /* WTETableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 888140A4203EB5DB003F9743 /* WTETableViewCell.m */; };
 		889806C820159286004F1704 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 889806C720159286004F1704 /* AppDelegate.m */; };
@@ -191,6 +193,10 @@
 		8856484F2045870D00B2BB4F /* WTECardCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTECardCoverView.m; sourceTree = "<group>"; };
 		887BC2DD204693F500FC46D8 /* WTEAddViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTEAddViewController.h; sourceTree = "<group>"; };
 		887BC2DE204693F500FC46D8 /* WTEAddViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTEAddViewController.m; sourceTree = "<group>"; };
+		8880594620539DDA00BC630F /* WTEDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTEDetailViewController.h; sourceTree = "<group>"; };
+		8880594720539DDA00BC630F /* WTEDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTEDetailViewController.m; sourceTree = "<group>"; };
+		8880594A20539DF600BC630F /* WTEDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTEDetailTableViewCell.h; sourceTree = "<group>"; };
+		8880594B20539DF600BC630F /* WTEDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTEDetailTableViewCell.m; sourceTree = "<group>"; };
 		888140A0203EB4B7003F9743 /* WTETableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTETableViewController.h; sourceTree = "<group>"; };
 		888140A1203EB4B7003F9743 /* WTETableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTETableViewController.m; sourceTree = "<group>"; };
 		888140A3203EB5DB003F9743 /* WTETableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTETableViewCell.h; sourceTree = "<group>"; };
@@ -502,6 +508,24 @@
 			path = WTEAddViewController;
 			sourceTree = "<group>";
 		};
+		8880594520539DC500BC630F /* WTEDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8880594620539DDA00BC630F /* WTEDetailViewController.h */,
+				8880594720539DDA00BC630F /* WTEDetailViewController.m */,
+			);
+			path = WTEDetailViewController;
+			sourceTree = "<group>";
+		};
+		8880594920539DE000BC630F /* WTEDetailTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8880594A20539DF600BC630F /* WTEDetailTableViewCell.h */,
+				8880594B20539DF600BC630F /* WTEDetailTableViewCell.m */,
+			);
+			path = WTEDetailTableViewCell;
+			sourceTree = "<group>";
+		};
 		8881409B203E88EB003F9743 /* WTETableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -574,6 +598,7 @@
 		889806DD20159299004F1704 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8880594920539DE000BC630F /* WTEDetailTableViewCell */,
 				8881409F203E8936003F9743 /* WTETableViewCell */,
 				88D1638C201B2C3D00F2143B /* WTECollectionView */,
 				889806E020159367004F1704 /* WTECardView */,
@@ -585,6 +610,7 @@
 		889806DE2015929E004F1704 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8880594520539DC500BC630F /* WTEDetailViewController */,
 				887BC2DC204693E100FC46D8 /* WTEAddViewController */,
 				8881409B203E88EB003F9743 /* WTETableViewController */,
 				88775647201B046A0083614C /* WTEPickViewController */,
@@ -807,6 +833,7 @@
 				658EE9312053819700E32680 /* YLTokenRefresher.m in Sources */,
 				889806E4201593BA004F1704 /* WTEPickViewController.m in Sources */,
 				88F63F78204E0A5C006C0A5A /* WTEDishItemModel.m in Sources */,
+				8880594C20539DF600BC630F /* WTEDetailTableViewCell.m in Sources */,
 				658EE91D2053819600E32680 /* MJRefreshAutoNormalFooter.m in Sources */,
 				658EE91E2053819600E32680 /* MJRefreshNormalHeader.m in Sources */,
 				658EE9132053819600E32680 /* MJRefreshConst.m in Sources */,
@@ -826,6 +853,7 @@
 				658EE9342053819700E32680 /* DynamicConfig.m in Sources */,
 				885648502045870D00B2BB4F /* WTECardCoverView.m in Sources */,
 				658EE9332053819700E32680 /* YLResponseModel.m in Sources */,
+				8880594820539DDA00BC630F /* WTEDetailViewController.m in Sources */,
 				658EE9162053819600E32680 /* NSBundle+MJRefresh.m in Sources */,
 				658EE92B2053819700E32680 /* Foundation+YLNetworking.m in Sources */,
 				658EE9272053819600E32680 /* YLAPIProxy.m in Sources */,

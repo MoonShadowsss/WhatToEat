@@ -126,7 +126,7 @@
     if (_editButton == nil) {
         _editButton = [[UIButton alloc] init];
         [_editButton addTarget:self action:@selector(editButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+        [_editButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
         _editButton.imageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _editButton;

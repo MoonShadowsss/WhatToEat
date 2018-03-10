@@ -29,6 +29,7 @@
     self.cardItemViews = [[NSMutableArray alloc] initWithObjects:[[WTECardItemView alloc] init], [[WTECardItemView alloc] init], [[WTECardItemView alloc] init], nil];
     self.visibleCardItemViewCount = 0;
     self.firstCardItemViewFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height * 180 / 191);
+    self.firstCardItemViewCenter = CGPointMake(self.frame.size.width / 2, self.frame.size.height * 90 / 191);
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandle:)];
     [self addGestureRecognizer:pan];
     if (totalNumberOfItemView > 0) {
@@ -97,7 +98,17 @@
     } else if (panGesture.state == UIGestureRecognizerStateEnded) {
         if ([self.subviews containsObject:self.cardCoverView]) {
             if (fabs(self.cardCoverView.center.x - self.firstCardItemViewCenter.x) > [UIScreen mainScreen].bounds.size.width / 2.5 || [panGesture velocityInView:self].x > 800) {
-                [self.cardCoverView removeFromSuperview];
+                [UIView animateWithDuration:0.2
+                                 animations:^{
+                                     if (self.cardCoverView.center.x > self.firstCardItemViewCenter.x) {
+                                         self.cardCoverView.center = CGPointMake(self.cardCoverView.center.x + [UIScreen mainScreen].bounds.size.width, self.cardCoverView.center.y);
+                                     } else {
+                                         self.cardCoverView.center = CGPointMake(self.cardCoverView.center.x - [UIScreen mainScreen].bounds.size.width, self.cardCoverView.center.y);
+                                     }
+                                 }
+                                 completion:^(BOOL finished) {
+                                     [self.cardCoverView removeFromSuperview];
+                                 }];
             } else {
                 self.userInteractionEnabled = NO;
                 [UIView animateWithDuration:0.2
@@ -106,6 +117,7 @@
                                      self.cardCoverView.transform = CGAffineTransformIdentity;
                                  }
                                  completion:^(BOOL finished) {
+                                     self.cardCoverView.frame = self.firstCardItemViewFrame;
                                      self.userInteractionEnabled = YES;
                                  }];
             }

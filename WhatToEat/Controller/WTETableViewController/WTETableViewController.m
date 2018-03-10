@@ -26,7 +26,7 @@ static NSString *const detailViewControllerSegueIdentifier = @"detailViewControl
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = self.addButton;
+//    self.navigationItem.rightBarButtonItem = self.addButton;
     self.view.backgroundColor = [UIColor colorWithRed:35.0f / 255.0f green:173.0f / 255.0f blue:229.0f / 255.0f alpha:1];
     self.navigationItem.title = self.menuTitle;
     [self.view addSubview:self.backView];

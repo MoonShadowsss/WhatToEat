@@ -110,7 +110,6 @@
 }
 
 - (void)jumpButtonDidClick:(UIBarButtonItem *)sender {
-    
 }
 
 #pragma mark - TableView Delegate & DataSource

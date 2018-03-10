@@ -24,7 +24,7 @@
     NSDictionary *params = @{};
     if (manager == self.addStoreAPIManager) {
         params = @{
-                   kRandomStoreAPIManagerParamsKeyStoreId:self.model.storeId?:@""
+                   kAddStoreAPIManagerParamsKeyStoreId:self.model.storeId?:@""
                    };
     }
     return params;

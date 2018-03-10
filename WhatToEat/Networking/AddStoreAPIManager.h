@@ -8,7 +8,7 @@
 
 #import "YLBaseAPIManager.h"
 
-extern NSString * const kRandomStoreAPIManagerParamsKeyStoreId;
-@interface AddStoreAPIManager : YLBaseAPIManager
+extern NSString * const kAddStoreAPIManagerParamsKeyStoreId;
+@interface AddStoreAPIManager : YLBaseAPIManager<YLAPIManager>
 
 @end

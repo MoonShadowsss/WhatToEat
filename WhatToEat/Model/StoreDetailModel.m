@@ -56,6 +56,5 @@
     _storeItemModel.buyURL = self.buyURL;
     _storeItemModel.isLike = self.isLike;
     return _storeItemModel;
-
 }
 @end

@@ -17,7 +17,7 @@
              @"pictureURL":@"store_image",
              @"storeId":@"store_id",
              @"isLike":@"is_like",
-             @"information":@"store_info",
+             @"buyURL":@"url",
              };
 }
 
@@ -27,4 +27,9 @@
     }];
 }
 
++ (NSValueTransformer *)buyURLJSONTransformer {
+    return [MTLValueTransformer transformerUsingForwardBlock:^id(id value, BOOL *success, NSError *__autoreleasing *error) {
+        return [NSURL URLWithString:value];
+    }];
+}
 @end

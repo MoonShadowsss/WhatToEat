@@ -1116,10 +1116,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5AGSHE9SVE;
+				DEVELOPMENT_TEAM = W6Z7US22L6;
 				INFOPLIST_FILE = "WhatToEat/Supporting FIles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.hadow.WhatToEat;
+				PRODUCT_BUNDLE_IDENTIFIER = yzx.hadow.WhatToEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1131,10 +1132,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5AGSHE9SVE;
+				DEVELOPMENT_TEAM = W6Z7US22L6;
 				INFOPLIST_FILE = "WhatToEat/Supporting FIles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.hadow.WhatToEat;
+				PRODUCT_BUNDLE_IDENTIFIER = yzx.hadow.WhatToEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

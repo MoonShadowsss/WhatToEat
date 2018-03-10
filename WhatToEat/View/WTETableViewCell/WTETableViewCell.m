@@ -8,6 +8,7 @@
 
 #import "WTETableViewCell.h"
 #import <Masonry/Masonry.h>
+#import "UIImageView+AFNetworking.h"
 @interface WTETableViewCell()
 
 @property (strong, nonatomic) UIImageView *pictureImageView;
@@ -74,12 +75,9 @@
         self.locationLabel.text = self.storeItemViewModel.model.location;
         self.nameLabel.text = self.storeItemViewModel.model.name;
         self.isLike = self.storeItemViewModel.model.isLike;
-        NSData *pictureData = [NSData dataWithContentsOfURL:self.storeItemViewModel.model.pictureURL];
-        if (pictureData == nil) {
-            self.pictureImageView.image = [UIImage imageNamed:@"food2"];
-        } else {
-            self.pictureImageView.image = [UIImage imageWithData:pictureData];
-        }
+        
+
+        [self.pictureImageView setImageWithURL:self.storeItemViewModel.model.pictureURL];
     }];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

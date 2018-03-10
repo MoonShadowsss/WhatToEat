@@ -25,7 +25,7 @@ NSString * const kGetStoreAPIManagerParamsKeyMenuId = @"kGetStoreAPIManagerParam
 - (NSDictionary *)reformParams:(NSDictionary *)params {
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
     resultParams[@"menu_id"] = params[kGetStoreAPIManagerParamsKeyMenuId];
-    resultParams[@"since_id"] = [self sinceId];
+    resultParams[@"since_id"] = [self sinceId] ? [self sinceId] : @"0";
     resultParams[@"page_size"] = @(self.pageSize);
     resultParams[@"longitude"] = [WTELocation sharedLocation].longitude;
     resultParams[@"latitude"] = [WTELocation sharedLocation].latitude;

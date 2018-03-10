@@ -24,6 +24,8 @@ NSString * const kAddStoreAPIManagerParamsKeyStoreId = @"kAddStoreAPIManagerPara
 
 - (NSDictionary *)reformParams:(NSDictionary *)params {
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
+    resultParams[@"longitude"] = [WTELocation sharedLocation].longitude;
+    resultParams[@"latitude"] = [WTELocation sharedLocation].latitude;
     resultParams[@"store_id"] = params[kAddStoreAPIManagerParamsKeyStoreId];
     return resultParams;
 }
@@ -31,4 +33,6 @@ NSString * const kAddStoreAPIManagerParamsKeyStoreId = @"kAddStoreAPIManagerPara
 - (NSString *)keyOfResult {
     return @"data";
 }
+
+
 @end

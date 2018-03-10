@@ -24,6 +24,8 @@ NSString * const kRandomStoreAPIManagerParamsKeyMenuId = @"kRandomStoreAPIManage
 
 - (NSDictionary *)reformParams:(NSDictionary *)params {
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
+    resultParams[@"longitude"] = [WTELocation sharedLocation].longitude;
+    resultParams[@"latitude"] = [WTELocation sharedLocation].latitude;
     resultParams[@"menu_id"] = params[kRandomStoreAPIManagerParamsKeyMenuId];
     resultParams[@"page_size"] = @5;
     return resultParams;

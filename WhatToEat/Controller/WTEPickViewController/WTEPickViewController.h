@@ -10,6 +10,7 @@
 #import "WTECollectionViewLayout.h"
 #import "WTECollectionViewCell.h"
 #import "WTETableViewController.h"
+#import "WTELocation.h"
 
 @interface WTEPickViewController : UIViewController
 

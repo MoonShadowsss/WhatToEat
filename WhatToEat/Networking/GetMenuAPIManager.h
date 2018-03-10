@@ -7,6 +7,7 @@
 //
 
 #import "YLPageAPIManager.h"
+#import "WTELocation.h"
 
 @interface GetMenuAPIManager : YLPageAPIManager<YLPageAPIManager>
 

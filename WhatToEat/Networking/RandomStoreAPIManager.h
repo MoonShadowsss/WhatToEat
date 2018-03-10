@@ -7,6 +7,7 @@
 //
 
 #import "YLPageAPIManager.h"
+#import "WTELocation.h"
 
 extern NSString * const kRandomStoreAPIManagerParamsKeyMenuId;
 @interface RandomStoreAPIManager : YLPageAPIManager<YLPageAPIManager>

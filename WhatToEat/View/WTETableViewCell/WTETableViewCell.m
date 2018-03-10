@@ -64,12 +64,12 @@
 }
 
 #pragma mark - Getter & Setter
-- (void)setStoreItemModel:(StoreItemModel *)storeItemModel {
-    _storeItemModel = storeItemModel;
-    self.locationLabel.text = storeItemModel.location;
-    self.nameLabel.text = storeItemModel.name;
-    self.isLike = storeItemModel.isLike;
-    NSData *pictureData = [NSData dataWithContentsOfURL:storeItemModel.pictureURL];
+- (void)setStoreItemViewModel:(StoreItemViewModel *)storeItemViewModel {
+    _storeItemViewModel = storeItemViewModel;
+    self.locationLabel.text = storeItemViewModel.model.location;
+    self.nameLabel.text = storeItemViewModel.model.name;
+    self.isLike = storeItemViewModel.model.isLike;
+    NSData *pictureData = [NSData dataWithContentsOfURL:storeItemViewModel.model.pictureURL];
     if (pictureData == nil) {
         self.pictureImageView.image = [UIImage imageNamed:@"food2"];
     } else {

@@ -1,21 +1,21 @@
 //
-//  GetStoreAPIManager.m
+//  AddStoreAPIManager.m
 //  WhatToEat
 //
 //  Created by 殷子欣 on 2018/3/10.
 //  Copyright © 2018年 翟元浩. All rights reserved.
 //
 
-#import "RandomStoreAPIManager.h"
+#import "AddStoreAPIManager.h"
 
-NSString * const kRandomStoreAPIManagerParamsKeyMenuId = @"kRandomStoreAPIManagerParamsKeyMenuId";
-@implementation RandomStoreAPIManager
+NSString * const kRandomStoreAPIManagerParamsKeyStoreId = @"kRandomStoreAPIManagerParamsKeyStoreId";
+@implementation AddStoreAPIManager
 - (BOOL)isAuth {
     return false;
 }
 
 - (NSString *)path {
-    return @"randomStore";
+    return @"addStore";
 }
 
 - (NSString *)apiVersion {
@@ -24,8 +24,7 @@ NSString * const kRandomStoreAPIManagerParamsKeyMenuId = @"kRandomStoreAPIManage
 
 - (NSDictionary *)reformParams:(NSDictionary *)params {
     NSMutableDictionary *resultParams = [[NSMutableDictionary alloc] init];
-    resultParams[@"menu_id"] = params[kRandomStoreAPIManagerParamsKeyMenuId];
-    resultParams[@"page_size"] = @5;
+    resultParams[@"store_id"] = params[kRandomStoreAPIManagerParamsKeyStoreId];
     return resultParams;
 }
 

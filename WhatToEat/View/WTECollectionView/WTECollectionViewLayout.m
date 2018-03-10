@@ -53,8 +53,25 @@
 }
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity {
-    proposedContentOffset.x = [self centerXForIndex:[self currentIndex]];
-    return proposedContentOffset;
+//    proposedContentOffset.x = [self centerXForIndex:[self currentIndex]];
+//    return proposedContentOffset;
+    CGRect contentFrame;
+    contentFrame.size = self.collectionView.frame.size;
+    contentFrame.origin = proposedContentOffset;
+    
+    NSArray *array = [self layoutAttributesForElementsInRect:contentFrame];
+    
+    //2. 计算在可视范围的距离中心线最近的Item
+    CGFloat minCenterX = CGFLOAT_MAX;
+    CGFloat collectionViewCenterX = proposedContentOffset.x + self.collectionView.frame.size.width * 0.5;
+    for (UICollectionViewLayoutAttributes *attrs in array) {
+        if(ABS(attrs.center.x - collectionViewCenterX) < ABS(minCenterX)){
+            minCenterX = attrs.center.x - collectionViewCenterX;
+        }
+    }
+    
+    //3. 补回ContentOffset，则正好将Item居中显示
+    return CGPointMake(proposedContentOffset.x + minCenterX, proposedContentOffset.y);
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
@@ -69,6 +86,5 @@
 - (CGFloat)centerXForIndex:(NSInteger) index {
     return index * (self.itemSize.width + self.spacing) - self.edge.left;
 }
-
 
 @end

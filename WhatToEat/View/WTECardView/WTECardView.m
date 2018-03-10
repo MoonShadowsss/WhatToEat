@@ -101,9 +101,9 @@
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      if (self.cardCoverView.center.x > self.firstCardItemViewCenter.x) {
-                                         self.cardCoverView.center = CGPointMake(self.cardItemViews[0].center.x + [UIScreen mainScreen].bounds.size.width, self.cardItemViews[0].center.y);
+                                         self.cardCoverView.center = CGPointMake(self.cardCoverView.center.x + [UIScreen mainScreen].bounds.size.width, self.cardCoverView.center.y);
                                      } else {
-                                         self.cardCoverView.center = CGPointMake(self.cardItemViews[0].center.x - [UIScreen mainScreen].bounds.size.width, self.cardItemViews[0].center.y);
+                                         self.cardCoverView.center = CGPointMake(self.cardCoverView.center.x - [UIScreen mainScreen].bounds.size.width, self.cardCoverView.center.y);
                                      }
                                  }
                                  completion:^(BOOL finished) {

@@ -49,7 +49,7 @@
 
 - (YLBaseAPIManager *)getStoreDetailAPIManager {
     if (_getStoreDetailAPIManager == nil) {
-        _getStoreDetailAPIManager = [[YLBaseAPIManager alloc] init];
+        _getStoreDetailAPIManager = [[GetStoreDetailAPIManager alloc] init];
         _getStoreDetailAPIManager.dataSource = self;
     }
     return _getStoreDetailAPIManager;

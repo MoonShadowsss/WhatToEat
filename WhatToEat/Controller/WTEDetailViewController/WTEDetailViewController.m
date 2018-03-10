@@ -222,5 +222,10 @@
     return _jumpButton;
 }
 
-
+- (DetailViewModel *)viewModel {
+    if (_viewModel == nil) {
+        _viewModel = [[DetailViewModel alloc] init];
+    }
+    return  _viewModel;
+}
 @end

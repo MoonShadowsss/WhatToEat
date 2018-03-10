@@ -8,7 +8,8 @@
 
 
 #import "WTEPickViewController.h"
-#import "PickViewModel.h"
+#import "MenusViewModel.h"
+#import "StoresViewModel.h"
 
 static NSString *const segueIdentifier = @"tableViewControllerSegue";
 static NSString *const cellIdentifier = @"cellId";
@@ -18,7 +19,8 @@ static NSString *const cellIdentifier = @"cellId";
 @property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) WTEMenuModel *menuModel;
 @property (strong, nonatomic) NSMutableArray<WTEDishModel *> *dishModelArray;
-@property (strong, nonatomic) PickViewModel *viewMode;
+@property (strong, nonatomic) MenusViewModel *menusViewModel;
+@property (strong, nonatomic) StoresViewModel *storesViewModel;
 
 @end
 
@@ -27,7 +29,6 @@ static NSString *const cellIdentifier = @"cellId";
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.userModel = [WTEUserModel sharedUser];
     
     self.view.backgroundColor = [UIColor colorWithRed:35.0f / 255.0f green:173.0f / 255.0f blue:229.0f / 255.0f alpha:1];
     NSDictionary *colorAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
@@ -37,8 +38,8 @@ static NSString *const cellIdentifier = @"cellId";
     self.navigationItem.title = @"吃什么";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    [self fetchData];
-    
+    [self setupRAC];
+    [[self.menusViewModel.networkingRAC refreshCommand] execute:nil];
     WTECollectionViewLayout *layout = [[WTECollectionViewLayout alloc] init];
     layout.itemSize = CGSizeMake(self.view.frame.size.width * 0.69, self.view.frame.size.height * 0.75);
     layout.spacing = self.view.frame.size.width * 0.095;
@@ -49,7 +50,7 @@ static NSString *const cellIdentifier = @"cellId";
     self.collectionView.showsHorizontalScrollIndicator = NO;
     [self.collectionView registerClass:[WTECollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
     [self.view addSubview:self.collectionView];
-
+    
     self.pageControl.frame = CGRectMake(0, self.view.frame.size.height * 0.94, self.view.frame.size.width, self.view.frame.size.height * 0.06);
     [self.view addSubview:self.pageControl];
     
@@ -57,44 +58,46 @@ static NSString *const cellIdentifier = @"cellId";
 
 - (void)setupRAC {
     @weakify(self);
-    [[RACObserve(self.viewMode, menuItemModels) skip:1] subscribeNext:^(id x) {
+    [[RACObserve(self.menusViewModel, menuItemModels) skip:1] subscribeNext:^(id x) {
         @strongify(self);
-        self.headerView.balanceLabel.text = value;
-        [self.activityIndicatorView stopAnimating];
+        _dishModelArray = [NSMutableArray array];
+        [self fetchDishData];
+        
     }];
 }
 #pragma mark - Internet
-- (void)fetchData {
-    // 请求menu数据
-    NSString *menuURLDirection = @"https://link.xjtu.edu.cn/api/whattoeat/menu";
-    NSURL *menuURL = [NSURL URLWithString:menuURLDirection];
-    NSMutableURLRequest *menuRequest = [NSMutableURLRequest requestWithURL:menuURL];
-    menuRequest.HTTPMethod = @"POST";
-    menuRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:menuParam options:NSJSONWritingPrettyPrinted error:nil];
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionTask *menuTask = [session dataTaskWithRequest:menuRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        self.menuModel = [[WTEMenuModel alloc] initWithData:data];
-        _dishModelArray = [NSMutableArray array];
-        [self fetchDishData];
-    }];
-    [menuTask resume];
-}
-
+/*
+ - (void)fetchData {
+ // 请求menu数据
+ NSString *menuURLDirection = @"https://link.xjtu.edu.cn/api/whattoeat/menu";
+ NSURL *menuURL = [NSURL URLWithString:menuURLDirection];
+ NSMutableURLRequest *menuRequest = [NSMutableURLRequest requestWithURL:menuURL];
+ menuRequest.HTTPMethod = @"POST";
+ menuRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:menuParam options:NSJSONWritingPrettyPrinted error:nil];
+ NSURLSession *session = [NSURLSession sharedSession];
+ NSURLSessionTask *menuTask = [session dataTaskWithRequest:menuRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+ self.menuModel = [[WTEMenuModel alloc] initWithData:data];
+ _dishModelArray = [NSMutableArray array];
+ [self fetchDishData];
+ }];
+ [menuTask resume];
+ }
+ */
 - (void)fetchDishData {
     // 请求dish数据
     NSURL *dishURL = [NSURL URLWithString:@"https://link.xjtu.edu.cn/api/whattoeat/dish"];
-    for (WTEMenuItemModel *item in self.menuModel.menuModelItemArray) {
+    for (MenuItemModel *item in self.viewModel.menuItemModels) {
         NSString *menuId = item.menuId;
         NSMutableURLRequest *dishRequest = [NSMutableURLRequest requestWithURL:dishURL];
         dishRequest.HTTPMethod = @"POST";
-        NSDictionary *dishParam = @{@"user_id": self.userModel.userId, @"user_token": self.userModel.userToken, @"menu_id": menuId};
+        NSDictionary *dishParam = @{@"user_id": @"1", @"user_token": @"2", @"menu_id": menuId};
         dishRequest.HTTPBody = [NSJSONSerialization dataWithJSONObject:dishParam options:NSJSONWritingPrettyPrinted error:nil];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionTask *dishTask = [session dataTaskWithRequest:dishRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             WTEDishModel *dishModel = [[WTEDishModel alloc] initWithData:data];
             dishModel.menuId = menuId;
             [self.dishModelArray addObject:dishModel];
-            if ([menuId isEqualToString:self.menuModel.menuModelItemArray[self.menuModel.menuCount - 1].menuId]) {
+            if ([menuId isEqualToString:self.viewModel.menuItemModels[self.viewModel.menuCount - 1].menuId]) {
                 if ([NSThread isMainThread]) {
                     [self.collectionView reloadData];
                     self.pageControl.numberOfPages = [self.collectionView numberOfItemsInSection:0];
@@ -116,13 +119,13 @@ static NSString *const cellIdentifier = @"cellId";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.menuModel.menuCount;
+    return self.viewModel.menuCount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WTECollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
-    cell.menuItemModel = self.menuModel.menuModelItemArray[indexPath.row];
+    cell.menuItemModel = self.viewModel.menuItemModels[indexPath.row];
     cell.dishModel = self.dishModelArray[indexPath.row];
     [cell setup];
     return cell;
@@ -142,8 +145,7 @@ static NSString *const cellIdentifier = @"cellId";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:segueIdentifier]) {
         WTETableViewController *vc = segue.destinationViewController;
-        vc.menuTitle = self.menuModel.menuModelItemArray[self.pageControl.currentPage].name;
-        vc.userModel = self.userModel;
+        vc.menuTitle = self.viewModel.menuItemModels[self.pageControl.currentPage].name;
         vc.dishModel = self.dishModelArray[self.pageControl.currentPage];
     }
 }
@@ -158,11 +160,12 @@ static NSString *const cellIdentifier = @"cellId";
     return _pageControl;
 }
 
-- (PickViewModel *)viewMode {
-    if (_viewMode == nil) {
-        _viewMode = [[PickViewModel alloc] init];
+- (MenusViewModel *)menusViewModel {
+    if (_menusViewModel == nil) {
+        _menusViewModel = [[MenusViewModel alloc] init];
     }
-    return _viewMode;
+    return _menusViewModel;
 }
 
 @end
+

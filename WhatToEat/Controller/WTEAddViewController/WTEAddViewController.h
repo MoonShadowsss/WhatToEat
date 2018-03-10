@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "WTETableViewController.h"
-#import "WTEUserModel.h"
 
 @interface WTEAddViewController : UIViewController
 
-@property (strong, nonatomic) WTEUserModel *userModel;
 @property (copy, nonatomic) NSString *menuId;
 
 @end

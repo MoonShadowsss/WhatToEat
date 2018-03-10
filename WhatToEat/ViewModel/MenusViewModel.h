@@ -10,7 +10,8 @@
 #import "LKNetworking.h"
 #import "MenuItemModel.h"
 
-extern NSString * const kNetworkingRACTypeGetMenu;
-@interface PickViewModel : NSObject<YLNetworkingRACProtocol>
+@interface MenusViewModel : NSObject<YLNetworkingListRACProtocol>
+@property (assign, nonatomic) NSInteger menuCount;
 @property (nonatomic, copy) NSArray<MenuItemModel *> *menuItemModels;
 @end
+

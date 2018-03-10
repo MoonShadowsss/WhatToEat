@@ -10,11 +10,9 @@
 #import "WTEAddViewController.h"
 #import "WTETableViewCell.h"
 #import "WTEDishModel.h"
-#import "WTEUserModel.h"
 
 @interface WTETableViewController : UIViewController
 
-@property (strong, nonatomic) WTEUserModel *userModel;
 @property (copy, nonatomic) NSString *menuTitle;
 @property (strong, nonatomic) WTEDishModel *dishModel;
 

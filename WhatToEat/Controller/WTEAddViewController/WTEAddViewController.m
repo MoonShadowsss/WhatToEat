@@ -55,7 +55,7 @@
         NSURL *url = [NSURL URLWithString:urlDirection];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         request.HTTPMethod = @"POST";
-        NSDictionary *param = @{@"user_id": self.userModel.userId, @"user_token": self.userModel.userToken, @"menu_id": self.menuId, @"dish_name": self.nameTextField.text, @"dish_location": self.locationTextField.text};
+        NSDictionary *param = @{@"menu_id": self.menuId, @"dish_name": self.nameTextField.text, @"dish_location": self.locationTextField.text};
         request.HTTPBody = [NSJSONSerialization dataWithJSONObject:param options:NSJSONWritingPrettyPrinted error:nil];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionTask *task = [session dataTaskWithRequest:request];

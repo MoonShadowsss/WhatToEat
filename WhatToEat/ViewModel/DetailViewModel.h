@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "StoreModel.h"
+#import "StoreItemModel.h"
 
 @interface DetailViewModel : NSObject
-@property (nonatomic, strong) StoreModel *model;
+@property (nonatomic, strong) StoreItemModel *model;
 @end

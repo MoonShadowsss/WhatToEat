@@ -1,5 +1,5 @@
 //
-//  StoreModel.h
+//  StoreItemModel.h
 //  WhatToEat
 //
 //  Created by 殷子欣 on 2018/3/10.
@@ -9,7 +9,7 @@
 #import "MTLModel.h"
 #import <Mantle.h>
 
-@interface StoreModel : MTLModel <MTLJSONSerializing>
+@interface StoreItemModel : MTLModel <MTLJSONSerializing>
 
 @property (copy, nonatomic) NSString *name;
 @property (copy, nonatomic) NSString *location;

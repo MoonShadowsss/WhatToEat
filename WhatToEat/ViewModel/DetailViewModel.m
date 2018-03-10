@@ -9,5 +9,13 @@
 #import "DetailViewModel.h"
 
 @implementation DetailViewModel
+- (instancetype)initWithModel:(StoreDetailModel *)model {
+    self = [super init];
+    if (self) {
+        _storeItemViewModel = [_storeItemViewModel initWithModel:model.storeItemModel];
+        self.dishModels = [model.dishModels copy];
+    }
+    return self;
+}
 
 @end

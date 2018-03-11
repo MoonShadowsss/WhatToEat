@@ -20,6 +20,7 @@
 @property (strong, nonatomic) UILabel *informationLabel;
 @property (strong, nonatomic) UIButton *likeButton;
 @property (strong, nonatomic) UIBarButtonItem *jumpButton;
+@property (strong, nonatomic) UIView *shelterView;
 
 @end
 
@@ -36,6 +37,13 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(self.view.mas_width);
         make.height.equalTo(self.backgroundImageView.mas_width);
+    }];
+    [self.backgroundImageView addSubview:self.shelterView];
+    [self.shelterView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.backgroundImageView.mas_bottom);
+        make.left.equalTo(self.backgroundImageView.mas_left);
+        make.right.equalTo(self.backgroundImageView.mas_right);
+        make.height.equalTo(self.backgroundImageView.mas_height).multipliedBy(0.72);
     }];
     
     [self.view addSubview:self.scrollView];
@@ -64,28 +72,34 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.likeButton.mas_bottom).offset(10);
         make.centerX.equalTo(self.scrollView.mas_centerX);
+        make.right.equalTo(self.scrollView.mas_right).offset(-20);
+
     }];
     
     [self.scrollView addSubview:self.locationLabel];
     [self.locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLabel.mas_bottom).offset(10);
         make.centerX.equalTo(self.scrollView.mas_centerX);
+        make.right.equalTo(self.scrollView.mas_right).offset(-20);
     }];
     [self.scrollView addSubview:self.informationLabel];
     [self.informationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.locationLabel.mas_bottom).offset(10);
         make.centerX.equalTo(self.scrollView.mas_centerX);
+        make.right.equalTo(self.scrollView.mas_right).offset(-20);
     }];
-    [self.scrollView addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
+    self.tableView.rowHeight = self.view.frame.size.height * 0.125;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.informationLabel.mas_bottom);
-        make.left.equalTo(self.scrollView.mas_left);
-        make.right.equalTo(self.scrollView.mas_right);
+        make.top.equalTo(self.informationLabel.mas_bottom).offset(10);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
         make.bottom.equalTo(self.view.mas_bottom);
     }];
     self.scrollView.contentSize = CGSizeMake(0, self.scrollView.frame.size.height + self.tableView.frame.origin.y);
     [self setupRAC];
     [[self.viewModel.networkingRAC requestCommand] execute:nil];
+    [self setup];
 }
 
 - (void)setupRAC {
@@ -112,6 +126,26 @@
 - (void)jumpButtonDidClick:(UIBarButtonItem *)sender {
 }
 
+- (void)setup {
+    self.nameLabel.text = self.viewModel.storeItemViewModel.model.name;
+    self.locationLabel.text = self.viewModel.storeItemViewModel.model.location;
+    self.informationLabel.text = self.viewModel.storeItemViewModel.model.information;
+    NSData *pictureData = [NSData dataWithContentsOfURL:self.viewModel.storeItemViewModel.model.pictureURL];
+    if (pictureData == nil) {
+        self.pictureImageView.image = [UIImage imageNamed:@"food2"];
+    } else {
+        self.pictureImageView.image = [UIImage imageWithData:pictureData];
+    }
+    if (self.viewModel.storeItemViewModel.model.isLike) {
+        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    } else {
+        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
+    }
+    [self.backgroundImageView setImageToBlur:self.pictureImageView.image completionBlock:nil];
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - TableView Delegate & DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -129,25 +163,13 @@
 }
 
 #pragma mark - Getter & Setter
-//- (void)setStoreItemViewModel:(StoreItemViewModel *)storeItemViewModel {
-//    _storeItemViewModel = storeItemViewModel;
-//    StoreItemModel *storeItemModel = storeItemViewModel.model;
-//    self.nameLabel.text = storeItemModel.name;
-//    self.locationLabel.text = storeItemModel.location;
-//    if (storeItemModel.isLike) {
-//        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-//    } else {
-//        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
-//    }
-//    NSData *pictureData = [NSData dataWithContentsOfURL:storeItemModel.pictureURL];
-//    if (pictureData == nil) {
-//        self.pictureImageView.image = [UIImage imageNamed:@"food3"];
-//    } else {
-//        self.pictureImageView.image = [UIImage imageWithData:pictureData];
-//    }
-//
-//}
-
+- (UIView *)shelterView {
+    if (_shelterView == nil) {
+        _shelterView = [[UIView alloc] init];
+        _shelterView.backgroundColor = [UIColor colorWithRed:35.0f / 255.0f green:173.0f / 255.0f blue:229.0f / 255.0f alpha:1];
+    }
+    return _shelterView;
+}
 - (UIImageView *)backgroundImageView {
     if (_backgroundImageView == nil) {
         _backgroundImageView = [[UIImageView alloc] init];
@@ -178,6 +200,8 @@
         _tableView = [[UITableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor colorWithRed:35.0f / 255.0f green:173.0f / 255.0f blue:229.0f / 255.0f alpha:1];
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     }
     return _tableView;
 }
@@ -186,6 +210,8 @@
     if (_nameLabel == nil) {
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
+        _nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:24];
+        _nameLabel.textColor = [UIColor whiteColor];
     }
     return _nameLabel;
 }
@@ -194,6 +220,7 @@
     if (_locationLabel == nil) {
         _locationLabel = [[UILabel alloc] init];
         _locationLabel.textAlignment = NSTextAlignmentCenter;
+        _locationLabel.textColor = [UIColor whiteColor];
     }
     return _locationLabel;
 }
@@ -202,6 +229,7 @@
     if (_informationLabel == nil) {
         _informationLabel = [[UILabel alloc] init];
         _informationLabel.textAlignment = NSTextAlignmentCenter;
+        _informationLabel.textColor = [UIColor whiteColor];
     }
     return _informationLabel;
 }
@@ -224,7 +252,10 @@
 - (DetailViewModel *)viewModel {
     if (_viewModel == nil) {
         _viewModel = [[DetailViewModel alloc] init];
+        _viewModel.storeItemViewModel = [[StoreItemViewModel alloc] init];
+
     }
     return  _viewModel;
 }
+
 @end

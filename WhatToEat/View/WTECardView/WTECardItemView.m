@@ -66,7 +66,6 @@
 
 #pragma mark - Button Event
 - (void)likeButtonDidClick:(UIButton *)sender {
-
 #warning POST未写
     self.isLike = !self.isLike;
 }

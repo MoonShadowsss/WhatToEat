@@ -66,11 +66,6 @@
 
 #pragma mark - Button Event
 - (void)likeButtonDidClick:(UIButton *)sender {
-    if (self.isLike) {
-        [self.likeButton setImage:[UIImage imageNamed:@"unlike"] forState:UIControlStateNormal];
-    } else {
-        [self.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-    }
 #warning POST未写
     self.isLike = !self.isLike;
 }

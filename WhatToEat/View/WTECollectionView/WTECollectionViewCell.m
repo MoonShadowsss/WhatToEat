@@ -30,7 +30,7 @@
     self.menuNameLabel.frame = CGRectMake(0, self.frame.size.height * 0.81, self.frame.size.width, self.frame.size.height * 0.036);
     self.menuNameLabel.font = [UIFont fontWithName:@"Helvetica" size:self.frame.size.height * 0.036];
     [self addSubview:self.editButton];
-    self.editButton.frame = CGRectMake(self.frame.size.width / 2 - self.frame.size.height * 0.1 / 2, self.frame.size.height * 0.9, self.frame.size.height * 0.1, self.frame.size.height * 0.1);
+    self.editButton.frame = CGRectMake(self.frame.size.width / 2 - self.frame.size.height * 0.08 / 2, self.frame.size.height * 0.9, self.frame.size.height * 0.08, self.frame.size.height * 0.08);
 }
 
 #pragma mark - Button Event

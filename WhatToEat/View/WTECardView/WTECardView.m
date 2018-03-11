@@ -50,7 +50,7 @@
         [self.cardItemViews[1] setup];
         self.secondCardItemViewFrame = self.cardItemViews[1].frame;
         [self sendSubviewToBack:self.cardItemViews[1]];
-        self.cardItemViews[1].userInteractionEnabled = NO;
+        self.cardItemViews[1].userInteractionEnabled = YES;
         self.visibleCardItemViewCount = 2;
     }
     if (totalNumberOfItemView > 2) {
@@ -60,7 +60,7 @@
         [self.cardItemViews[2] setup];
         self.thirdCardItemViewFrame = self.cardItemViews[2].frame;
         self.cardItemViews[2].alpha = 0.5;
-        self.cardItemViews[2].userInteractionEnabled = NO;
+        self.cardItemViews[2].userInteractionEnabled = YES;
         [self sendSubviewToBack:self.cardItemViews[2]];
         self.visibleCardItemViewCount = 3;
     }
@@ -110,7 +110,7 @@
                                      [self.cardCoverView removeFromSuperview];
                                  }];
             } else {
-                self.userInteractionEnabled = NO;
+                self.userInteractionEnabled = YES;
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      self.cardCoverView.transform = CGAffineTransformMakeScale(1.2, 1.2);
@@ -124,7 +124,7 @@
             if (fabs(self.cardItemViews[0].center.x - self.firstCardItemViewCenter.x) > [UIScreen mainScreen].bounds.size.width / 2.5 || [panGesture velocityInView:self].x > 800) {
                 [self removeFirst];
             } else {
-                self.userInteractionEnabled = NO;
+                self.userInteractionEnabled = YES;
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      self.cardItemViews[0].center = self.firstCardItemViewCenter;

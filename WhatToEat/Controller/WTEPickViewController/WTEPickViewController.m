@@ -137,8 +137,8 @@ static NSString *const cellIdentifier = @"cellId";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:tableViewControllerSegueIdentifier]) {
         WTETableViewController *vc = segue.destinationViewController;
-        vc.menuTitle = self.viewModel.menusViewModel.menuItemModels[self.pageControl.currentPage].name;
-        vc.viewModel.menuId = self.viewModel.storesViewModels[self.pageControl.numberOfPages - self.pageControl.currentPage - 1].menuId;
+        vc.menuTitle = self.viewModel.menusViewModel.menuItemModels[self.pageControl.numberOfPages - self.pageControl.currentPage - 1].name;
+        vc.viewModel.menuId = self.viewModel.storesViewModels[self.pageControl.currentPage].menuId;
     }
 }
 

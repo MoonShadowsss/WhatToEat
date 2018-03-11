@@ -65,7 +65,7 @@
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.textColor = [UIColor colorWithRed:0 green:17.0f / 255.0f blue:26.0f / 255.0f alpha:1];
-        _nameLabel.text = @"翻开看看吧";
+        _nameLabel.text = @"我是一个朴素的封面";
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.adjustsFontSizeToFitWidth = YES;
     }
